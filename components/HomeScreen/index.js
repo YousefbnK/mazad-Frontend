@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import CountDown from "react-native-countdown-component";
 
 //Style
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 
 //Data
-import categories from "../../categoriesData";
 
 //Components
-import CategoriesList from "../Categories";
+import CategoriesList from "./CategoriesList";
 
 class HomeScreen extends Component {
   state = {
@@ -23,14 +22,13 @@ class HomeScreen extends Component {
     }
   };
   render() {
-    const items = categories.map(item => item.name);
     return (
       <View>
         {!this.state.timerFinish && (
           <Text>The next Auction is starting in: </Text>
         )}
         <CountDown
-          until={5}
+          until={0}
           onFinish={() => this.setState({ timerFinish: true })}
           onPress={() => alert("Hello")}
           size={20}
@@ -40,7 +38,7 @@ class HomeScreen extends Component {
             <Text> Take me to the Auction !</Text>
           </TouchableOpacity>
         )}
-        <CategoriesList items={items} />
+        <CategoriesList />
       </View>
     );
   }
