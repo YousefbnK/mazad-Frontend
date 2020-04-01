@@ -28,7 +28,7 @@ class HomeScreen extends Component {
           <Text>The next Auction is starting in: </Text>
         )}
         <CountDown
-          until={0}
+          until={1200000}
           onFinish={() => this.setState({ timerFinish: true })}
           onPress={() => alert("Hello")}
           size={20}

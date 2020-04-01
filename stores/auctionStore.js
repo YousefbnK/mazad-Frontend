@@ -3,10 +3,11 @@ import { instance } from "./instance";
 
 //Data
 import categories from "../categoriesData";
+import auctions from "../auctionData";
 
 class AuctionStore {
   categoryList = categories;
-  auctions = [];
+  auctions = auctions;
   auctionItems = [];
   loading = true;
 
