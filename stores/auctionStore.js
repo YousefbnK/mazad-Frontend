@@ -4,11 +4,12 @@ import { instance } from "./instance";
 //Data
 import categories from "../categoriesData";
 import auctions from "../auctionData";
+import auctionItemData from "../auctionItemData";
 
 class AuctionStore {
   categoryList = categories;
   auctions = auctions;
-  auctionItems = [];
+  auctionItem = auctionItemData;
   loading = true;
 
   fetchCategories = async () => {
@@ -48,7 +49,7 @@ class AuctionStore {
 decorate(AuctionStore, {
   categoryList: observable,
   auctions: observable,
-  auctionItems: observable,
+  auctionItem: observable,
   loading: observable
 });
 
