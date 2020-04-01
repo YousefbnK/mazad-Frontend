@@ -4525,6 +4525,13 @@ react-native-grid-list@^1.1.0:
   dependencies:
     prop-types "^15.6.0"
 
+react-native-indicator@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-indicator/-/react-native-indicator-1.2.0.tgz#3c7fb342bbe91597199eb851d02b75b3ea1e1845"
+  integrity sha512-NHVn4TQPxnqUrwlArYKjQxCHR4oRjtv/9/P2djTF098UGVlQPrjxJEzW3TX6o9td3FC9qIRlY3CTBXNkT8oHfQ==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-native-iphone-x-helper@^1.0.3:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
