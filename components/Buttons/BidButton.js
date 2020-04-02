@@ -8,17 +8,17 @@ import { observer } from "mobx-react";
 
 const BidButton = props => {
   const submitBid = () => {
-    if (props.bid >= props.startBid && props.bid >= props.currentBid) {
+    if (
+      props.bid >= auctionStore.auctionItem[0].startBid &&
+      props.bid > props.currentBid
+    ) {
       props.submitBid(props.bid);
     } else {
-      alert("booo");
+      alert("raise your bid");
     }
   };
   return (
-    <TouchableHighlight
-      underlayColor="rgba(73,182,77,1,0.9)"
-      onPress={submitBid}
-    >
+    <TouchableHighlight underlayColor="#49b64d" onPress={submitBid}>
       <View style={styles.container}>
         <Text style={styles.text}>Bid</Text>
       </View>

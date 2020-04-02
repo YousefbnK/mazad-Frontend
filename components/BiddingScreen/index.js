@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import io from "socket.io-client";
 
 //Styles
 import styles from "./styles";
@@ -15,11 +16,21 @@ class BiddingScreen extends Component {
     currentBid: 0
   };
 
-  onChangeText = num => this.setState({ bid: num });
+  socket = io.connect("http://127.0.0.1:3000");
 
-  submitCurrentBid = bid => this.setState({ currentBid: bid });
+  componentDidMount() {
+    this.socket;
+  }
+
+  submitCurrentBid = bid => {
+    this.socket.emit("Bid", bid);
+    this.setState({ bid: 0 });
+  };
 
   render() {
+    this.socket.on("Bid", bid => {
+      this.setState({ currentBid: bid });
+    });
     return (
       <ScrollView>
         <View>
@@ -40,15 +51,17 @@ class BiddingScreen extends Component {
           </Text>
           <TextInput
             style={styles.textInput}
+            value={this.state.bid}
             placeholder="Enter Bid... "
-            onChangeText={this.onChangeText}
+            onChangeText={bid => {
+              this.setState({ bid });
+            }}
             keyboardType={"numeric"}
           />
           <BidButton
             bid={this.state.bid}
-            currentBid={this.state.currentBid}
             submitBid={this.submitCurrentBid}
-            startBid={auctionStore.auctionItem[0].startBid}
+            currentBid={this.state.currentBid}
           />
         </View>
       </ScrollView>
