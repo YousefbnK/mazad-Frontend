@@ -41,6 +41,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     alignSelf: "flex-start",
     position: "absolute",
+    right: 20
+  },
+  shake: {
+    height: 50,
+    width: 160,
+    bottom: -100,
+    borderColor: "grey",
+    borderWidth: 2,
+    alignSelf: "flex-start",
+    position: "absolute",
     left: 20
   }
 });

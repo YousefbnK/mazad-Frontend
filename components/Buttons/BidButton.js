@@ -9,12 +9,12 @@ import { observer } from "mobx-react";
 const BidButton = props => {
   const submitBid = () => {
     if (
-      props.bid >= auctionStore.auctionItem[0].startBid &&
-      props.bid > props.currentBid
+      (props.bid >= auctionStore.auctionItem[0].startBid) &
+      (props.bid > props.currentBid)
     ) {
       props.submitBid(props.bid);
     } else {
-      alert("raise your bid");
+      props.shake();
     }
   };
   return (
