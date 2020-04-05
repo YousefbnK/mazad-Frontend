@@ -5,6 +5,7 @@ import io from "socket.io-client";
 //Styles
 import styles from "./styles";
 import { Text, View, Image, ScrollView, TextInput } from "react-native";
+import { Shake } from "react-native-motion";
 
 //Stores
 import auctionStore from "../../stores/auctionStore";
@@ -13,10 +14,11 @@ import BidButton from "../Buttons/BidButton";
 class BiddingScreen extends Component {
   state = {
     bid: 0,
-    currentBid: 0
+    currentBid: 0,
+    shake: true
   };
 
-  socket = io.connect("http://127.0.0.1:3000");
+  socket = io.connect("http://127.0.0.1:8000");
 
   componentDidMount() {
     this.socket;
@@ -26,6 +28,8 @@ class BiddingScreen extends Component {
     this.socket.emit("Bid", bid);
     this.setState({ bid: 0 });
   };
+
+  setTimeout = () => this.setState({ shake: !this.state.shake });
 
   render() {
     this.socket.on("Bid", bid => {
@@ -49,19 +53,23 @@ class BiddingScreen extends Component {
           <Text style={styles.description}>
             {auctionStore.auctionItem[0].description}
           </Text>
-          <TextInput
-            style={styles.textInput}
-            value={this.state.bid}
-            placeholder="Enter Bid... "
-            onChangeText={bid => {
-              this.setState({ bid });
-            }}
-            keyboardType={"numeric"}
-          />
+          <Shake value={this.state.shake} type="timing">
+            <TextInput
+              style={styles.textInput}
+              value={this.state.bid}
+              placeholder="Enter Bid... "
+              onChangeText={bid => {
+                this.setState({ bid });
+              }}
+              keyboardType={"numeric"}
+            ></TextInput>
+          </Shake>
+
           <BidButton
             bid={this.state.bid}
             submitBid={this.submitCurrentBid}
             currentBid={this.state.currentBid}
+            shake={this.setTimeout}
           />
         </View>
       </ScrollView>

@@ -44,6 +44,14 @@ class AuctionStore {
       console.error(err);
     }
   };
+
+  submitBids = async bid => {
+    try {
+      await instance.post("", bid);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }
 
 decorate(AuctionStore, {
