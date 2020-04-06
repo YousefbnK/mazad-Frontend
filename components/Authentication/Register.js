@@ -3,17 +3,17 @@ import React, { Component } from "react";
 //Styles
 import styles from "./styles";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
-import DropdownMenu from "react-native-dropdown-menu";
 
 //Stores
 import authStore from "../../stores/authStore";
 
 class Register extends Component {
   state = {
-    fullName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
-    status: ""
+    vendor: false
   };
 
   handlePress = () => this.props.navigation.navigate("Login");
@@ -21,14 +21,21 @@ class Register extends Component {
   submitRegister = () => authStore.register(this.state);
 
   render() {
-    const status = [["Personal", "Vendor"]];
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.inputs}
-            placeholder="Full name"
-            onChangeText={fullName => this.setState({ fullName })}
+            placeholder="First Name"
+            onChangeText={first_name => this.setState({ first_name })}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Last Name"
+            onChangeText={last_name => this.setState({ last_name })}
           />
         </View>
 
@@ -49,21 +56,6 @@ class Register extends Component {
             onChangeText={password => this.setState({ password })}
           />
         </View>
-
-        {/* <View style={styles.inputContainer}>
-          <DropdownMenu
-            style={styles.inputs}
-            bgColor={"transparent"}
-            handler={selection => this.setState({ status: selection })}
-            data={status}
-          >
-            <Text style={styles.textByRegister}>
-              By registering on this App you confirm that you have read and
-              accept our policy
-            </Text>
-          </DropdownMenu>
-        </View> */}
-
         <TouchableOpacity
           style={[styles.buttonContainer, styles.loginButton]}
           onPress={this.submitRegister}
