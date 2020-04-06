@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import io from "socket.io-client";
+import NumericInput from "react-native-numeric-input";
 
 //Styles
 import styles from "./styles";
@@ -26,7 +27,7 @@ class BiddingScreen extends Component {
 
   submitCurrentBid = bid => {
     this.socket.emit("Bid", bid);
-    this.setState({ bid: 0 });
+    this.setState({ bid: this.state.currentBid });
   };
 
   setTimeout = () => this.setState({ shake: !this.state.shake });
@@ -53,28 +54,36 @@ class BiddingScreen extends Component {
           <Text style={styles.description}>
             {auctionStore.auctionItem[0].description}
           </Text>
-          <Shake value={this.state.shake} type="timing">
-            <TextInput
-              style={styles.textInput}
-              value={this.state.bid}
-              placeholder="Enter Bid... "
-              onChangeText={bid => {
-                this.setState({ bid });
-              }}
-              keyboardType={"numeric"}
-            ></TextInput>
-          </Shake>
+          <View style={styles.textInput}>
+            <Shake value={this.state.shake} type="timing">
+              <NumericInput
+                type={"up-down"}
+                style={{ borderWidth: 2 }}
+                minValue={auctionStore.auctionItem[0].startBid}
+                rounded={true}
+                step={5}
+                onChange={bid => {
+                  this.setState({ bid });
+                }}
+              />
+            </Shake>
+          </View>
 
           <BidButton
             bid={this.state.bid}
             submitBid={this.submitCurrentBid}
             currentBid={this.state.currentBid}
             shake={this.setTimeout}
+            navigation={this.props.navigation}
           />
         </View>
       </ScrollView>
     );
   }
 }
+
+BiddingScreen.navigationOptions = {
+  headerTransparent: "true"
+};
 
 export default observer(BiddingScreen);

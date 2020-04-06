@@ -35,13 +35,10 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 50,
-    width: 160,
     bottom: -200,
-    borderColor: "grey",
-    borderWidth: 2,
     alignSelf: "flex-start",
     position: "absolute",
-    right: 20
+    left: 40
   },
   shake: {
     height: 50,

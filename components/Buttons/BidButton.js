@@ -5,21 +5,26 @@ import { TouchableHighlight, Text, View } from "react-native";
 import styles from "./styles";
 import auctionStore from "../../stores/auctionStore";
 import { observer } from "mobx-react";
+import authStore from "../../stores/authStore";
 
 const BidButton = props => {
   const submitBid = () => {
-    if (
-      (props.bid >= auctionStore.auctionItem[0].startBid) &
-      (props.bid > props.currentBid)
-    ) {
-      props.submitBid(props.bid);
+    if (authStore.user) {
+      if (
+        props.bid >= auctionStore.auctionItem[0].startBid &&
+        props.bid > props.currentBid
+      ) {
+        props.submitBid(props.bid);
+      } else {
+        props.shake();
+      }
     } else {
-      props.shake();
+      props.navigation.navigate("Login");
     }
   };
   return (
     <TouchableHighlight underlayColor="#49b64d" onPress={submitBid}>
-      <View style={styles.container}>
+      <View style={authStore.user ? styles.container : styles.containerAnon}>
         <Text style={styles.text}>Bid</Text>
       </View>
     </TouchableHighlight>
