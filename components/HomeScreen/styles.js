@@ -1,14 +1,26 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import Constants from "expo-constants";
 
+// screen sizing
+const { width, height } = Dimensions.get("window");
+// orientation must fixed
+const SCREEN_WIDTH = width < height ? width : height;
+
+const numColumns = 2;
+// item size
+const itemHeight = 150;
+const itemMargin = 20;
+
 const styles = StyleSheet.create({
-  item: {
-    backgroundColor: "grey",
-    margin: 5,
-    width: 100,
-    height: 55,
-    padding: 10,
-    color: "white"
+  categoryTitle: {
+    flex: 1,
+    fontSize: 17,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#444444",
+    marginTop: 3,
+    marginRight: 5,
+    marginLeft: 5
   },
   grid: {
     marginBottom: 32,
@@ -17,13 +29,22 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   image: {
-    width: 100,
-    height: 100,
-    padding: 8,
-    margin: 5
+    width: (SCREEN_WIDTH - (numColumns + 1) * itemMargin) / numColumns,
+    height: itemHeight,
+    borderRadius: 15,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0
   },
   container: {
     marginTop: Constants.statusBarHeight
+  },
+  cardContainer: {
+    margin: 10,
+    width: (SCREEN_WIDTH - (numColumns + 1) * itemMargin) / numColumns,
+    height: itemHeight + 50,
+    borderColor: "#cccccc",
+    borderWidth: 0.5,
+    borderRadius: 15
   }
 });
 

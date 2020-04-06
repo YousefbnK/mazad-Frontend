@@ -1,18 +1,24 @@
 import React from "react";
-import { Text, Image, View } from "react-native";
 
 //Style
 import styles from "./styles";
+import { Text, Image, View, TouchableOpacity } from "react-native";
 
 const CategoryItem = props => {
+  const navigate = () => {
+    props.navigation.navigate("AuctionList", props.item);
+  };
+
   return (
-    <View>
-      <Image
-        style={styles.image}
-        source={{ uri: `${props.item.item.image}` }}
-      />
-      <Text style={styles.item}>{props.item.item.name}</Text>
-    </View>
+    <TouchableOpacity onPress={navigate}>
+      <View style={styles.cardContainer}>
+        <Image
+          style={styles.image}
+          source={{ uri: `${props.item.item.image}` }}
+        />
+        <Text style={styles.categoryTitle}>{props.item.item.name}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

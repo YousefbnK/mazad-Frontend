@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 
 //Style
 import styles from "./styles";
-import { FlatList, ScrollView, SafeAreaView, Text } from "react-native";
+import { FlatList, View } from "react-native";
 
 //Data
 import auctionStore from "../../stores/auctionStore";
@@ -11,17 +11,19 @@ import auctionStore from "../../stores/auctionStore";
 //Components
 import CategoryItem from "./CategoryItem";
 
-const CategoriesList = () => {
+const CategoriesList = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         contentContainerStyle={styles.grid}
-        numColumns={3}
+        numColumns={2}
         data={auctionStore.categoryList}
         keyExtractor={(items, index) => index.toString()}
-        renderItem={item => <CategoryItem item={item} />}
+        renderItem={item => (
+          <CategoryItem item={item} navigation={navigation} />
+        )}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 

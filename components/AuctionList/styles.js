@@ -10,6 +10,15 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 20
   },
+  auctionContainerStart: {
+    flex: 1,
+    margin: 10,
+    alignItems: "flex-start",
+    height: 115,
+    borderColor: "green",
+    borderWidth: 2,
+    borderRadius: 20
+  },
   auctionName: {
     fontFamily: "Arial",
     fontSize: 20,
