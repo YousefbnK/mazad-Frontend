@@ -16,7 +16,7 @@ const StackNav = createStackNavigator(
     Register: Register
   },
   {
-    initialRouteName: "Register"
+    initialRouteName: "HomeScreen"
   }
 );
 
