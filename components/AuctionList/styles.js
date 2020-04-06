@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
     margin: 10,
     alignItems: "flex-start",
     height: 115,
+    backgroundColor: "#DCDCDC",
+    opacity: 0.75,
     borderColor: "#cccccc",
     borderWidth: 0.5,
     borderRadius: 20

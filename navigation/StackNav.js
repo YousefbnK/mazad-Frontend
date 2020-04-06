@@ -16,7 +16,7 @@ const StackNav = createStackNavigator(
     Register: Register
   },
   {
-    initialRouteName: "BiddingScreen"
+    initialRouteName: "HomeScreen"
   }
 );
 
