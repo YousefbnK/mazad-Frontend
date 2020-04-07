@@ -13,7 +13,7 @@ class Login extends Component {
 
   handlePress = () => this.props.navigation.navigate("Register");
 
-  submitLogin = () => authStore.login(this.state);
+  submitLogin = () => authStore.login(this.state, this.props.navigation);
 
   render() {
     return (

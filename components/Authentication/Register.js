@@ -9,16 +9,17 @@ import authStore from "../../stores/authStore";
 
 class Register extends Component {
   state = {
+    username: "",
     first_name: "",
     last_name: "",
     email: "",
     password: "",
-    vendor: false
+    vender: false
   };
 
   handlePress = () => this.props.navigation.navigate("Login");
 
-  submitRegister = () => authStore.register(this.state);
+  submitRegister = () => authStore.register(this.state, this.props.navigation);
 
   render() {
     return (
@@ -45,6 +46,14 @@ class Register extends Component {
             placeholder="Email"
             keyboardType="email-address"
             onChangeText={email => this.setState({ email })}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Username"
+            onChangeText={username => this.setState({ username })}
           />
         </View>
 

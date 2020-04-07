@@ -21,23 +21,26 @@ class AuthStore {
     }
   };
 
-  login = async userData => {
+  login = async (userData, navigation) => {
     try {
-      const res = await instance.post("", userData);
+      const res = await instance.post("login/", userData);
       const user = res.data;
       console.log("User logged in", user);
       await this.setUser(user.access);
+      navigation.navigate("HomeScreen");
     } catch (err) {
       console.log(err);
       console.log("something went wrong logging in");
     }
   };
 
-  register = async userData => {
+  register = async (userData, navigation) => {
     try {
-      const res = await instance.post("", userData);
+      const res = await instance.post("register/", userData);
       const data = res.data;
+      console.log("User registered", data);
       await this.setUser(data.access);
+      navigation.navigate("HomeScreen");
     } catch (error) {
       console.error(error);
     }
