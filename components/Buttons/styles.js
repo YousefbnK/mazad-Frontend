@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#2cd18a",
     position: "absolute",
-    bottom: -200,
+    bottom: -120,
     left: 20
   },
   containerAnon: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "grey",
     position: "absolute",
-    bottom: -200,
+    bottom: -120,
     left: 20
   },
   text: {

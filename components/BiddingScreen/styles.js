@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 50,
-    bottom: -200,
+    bottom: -120,
     alignSelf: "flex-start",
     position: "absolute",
     left: 40
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   shake: {
     height: 50,
     width: 160,
-    bottom: -100,
+    bottom: -120,
     borderColor: "grey",
     borderWidth: 2,
     alignSelf: "flex-start",
