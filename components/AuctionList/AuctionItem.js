@@ -16,6 +16,14 @@ class AuctionItem extends Component {
     }
   };
 
+  startTime = () => {
+    const now = +new Date();
+    const date = +new Date(this.props.item.start_date);
+    const diff = date - now;
+    const seconds = diff / 1000;
+    return seconds;
+  };
+
   render() {
     return (
       <TouchableOpacity onPress={this.startAuction}>
@@ -26,11 +34,11 @@ class AuctionItem extends Component {
               : styles.auctionContainerStart
           }
         >
-          <Text style={styles.auctionName}>{this.props.item.name}</Text>
+          <Text style={styles.auctionName}>{this.props.item.title}</Text>
 
           <CountDown
             style={styles.countDownTimer}
-            until={this.props.item.startTime}
+            until={this.startTime()}
             onFinish={() => this.setState({ auctionStart: false })}
             size={15}
             digitStyle={{ backgroundColor: "#FFF" }}
