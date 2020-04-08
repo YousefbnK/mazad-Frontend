@@ -5,8 +5,10 @@ import styles from "./styles";
 import { Text, Image, View, TouchableOpacity } from "react-native";
 
 const CategoryItem = props => {
+  console.log("CATz", props);
+
   const navigate = () => {
-    props.navigation.navigate("AuctionList", props.item);
+    props.navigation.navigate("AuctionList", { catId: props.item.item.name });
   };
 
   return (

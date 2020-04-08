@@ -2,21 +2,29 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 //Style
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 
 //Stores
 import auctionStore from "../../stores/auctionStore";
 
 //Components
 import AuctionItem from "./AuctionItem";
+import AddAuctionButton from "../Buttons/AddAuctionButton";
 
 class AuctionList extends Component {
+  state = {
+    catName: this.props.navigation.getParam("catId")
+  };
+
   render() {
-    auctions = auctionStore.auctions.map(auction => (
+    console.log("CATID", this.props.navigation.getParam("catId"));
+    console.log("Auctions", auctionStore.auctions);
+
+    const auctions = auctionStore.auctions.map(auction => (
       <AuctionItem
         item={auction}
         navigation={this.props.navigation}
-        key={auction.name}
+        key={auction.title}
       />
     ));
     return (
@@ -28,7 +36,8 @@ class AuctionList extends Component {
 }
 
 AuctionList.navigationOptions = {
-  title: "Auctions"
+  title: "Auctions",
+  headerRight: <AddAuctionButton />
 };
 
 export default observer(AuctionList);

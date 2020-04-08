@@ -2,22 +2,22 @@ import { decorate, observable } from "mobx";
 import { instance } from "./instance";
 
 //Data
-import categories from "../categoriesData";
 import auctions from "../auctionData";
 import auctionItemData from "../auctionItemData";
 
 class AuctionStore {
-  categoryList = categories;
-  auctions = auctions;
+  categories = [];
+  auctions = [];
   auctionItem = auctionItemData;
-  loading = true;
+  loadingCat = true;
+  loadingAuc = true;
 
   fetchCategories = async () => {
     try {
-      const res = await instance.get("");
+      const res = await instance.get("category/");
       const categories = res.data;
       this.categories = categories;
-      this.loading = false;
+      this.loadingCat = false;
     } catch (err) {
       console.error(err);
     }
@@ -25,10 +25,10 @@ class AuctionStore {
 
   fetchAuctions = async () => {
     try {
-      const res = await instance.get("");
+      const res = await instance.get("auction/");
       const auctions = res.data;
       this.auctions = auctions;
-      this.loading = false;
+      this.loadingAuc = false;
     } catch (err) {
       console.error(err);
     }
@@ -55,12 +55,14 @@ class AuctionStore {
 }
 
 decorate(AuctionStore, {
-  categoryList: observable,
+  categories: observable,
   auctions: observable,
   auctionItem: observable,
-  loading: observable
+  loadingCat: observable,
+  loadingAuc: observable
 });
 
 const auctionStore = new AuctionStore();
-
+auctionStore.fetchCategories();
+auctionStore.fetchAuctions();
 export default auctionStore;

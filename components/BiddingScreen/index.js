@@ -19,7 +19,7 @@ class BiddingScreen extends Component {
     shake: true
   };
 
-  socket = io.connect("http://127.0.0.1:8000");
+  socket = io.connect("http://127.0.0.1:8001");
 
   componentDidMount() {
     this.socket;
@@ -45,9 +45,11 @@ class BiddingScreen extends Component {
           />
         </View>
         <View style={styles.info}>
-          <Text style={styles.initialPrice}>
-            Starting bid: {auctionStore.auctionItem[0].startBid} KD
-          </Text>
+          {this.state.currentBid < 1 && (
+            <Text style={styles.initialPrice}>
+              Starting bid: {auctionStore.auctionItem[0].startBid} KD
+            </Text>
+          )}
           <Text style={styles.currentBid}>
             Current bid: {this.state.currentBid} KD
           </Text>
@@ -60,8 +62,11 @@ class BiddingScreen extends Component {
                 type={"up-down"}
                 style={{ borderWidth: 2 }}
                 minValue={auctionStore.auctionItem[0].startBid}
+                initValue={auctionStore.auctionItem[0].startBid}
                 rounded={true}
-                step={5}
+                reachMinIncIconStyle={{ marginTop: 15 }}
+                reachMinDecIconStyle={{ color: "white" }}
+                step={auctionStore.auctionItem[0].startBid / 10}
                 onChange={bid => {
                   this.setState({ bid });
                 }}
