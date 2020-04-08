@@ -17,7 +17,7 @@ const CategoriesList = ({ navigation }) => {
       <FlatList
         contentContainerStyle={styles.grid}
         numColumns={2}
-        data={auctionStore.categoryList}
+        data={auctionStore.categories}
         keyExtractor={(items, index) => index.toString()}
         renderItem={item => (
           <CategoryItem item={item} navigation={navigation} />
