@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 
 //Style
 import styles from "./styles";
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text } from "react-native";
 
 //Data
 import auctionStore from "../../stores/auctionStore";

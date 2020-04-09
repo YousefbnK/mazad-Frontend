@@ -16,7 +16,10 @@ const StackNav = createStackNavigator(
     Register: Register
   },
   {
-    initialRouteName: "AuctionList"
+    initialRouteName: "HomeScreen",
+    defaultNavigationOptions: {
+      gesturesEnabled: false
+    }
   }
 );
 
