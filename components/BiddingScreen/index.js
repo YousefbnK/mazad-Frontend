@@ -88,7 +88,9 @@ class BiddingScreen extends Component {
 }
 
 BiddingScreen.navigationOptions = {
-  headerTransparent: "true"
+  headerTransparent: "true",
+  swipeEnabled: false,
+  headerLeft: null
 };
 
 export default observer(BiddingScreen);
