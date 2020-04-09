@@ -7,7 +7,7 @@ import Modal, {
   ModalFooter,
   ModalButton
 } from "react-native-modals";
-import { View, TextInput, Button, Text } from "react-native";
+import { View, TextInput, Button, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
 class AddAuctionModal extends Component {
@@ -77,32 +77,34 @@ class AddAuctionModal extends Component {
                 onChangeText={title => this.setState({ title })}
               />
             </View>
-            <View style={styles.inputContainer}>
-              <Button
-                title={`${this.state.date}`}
-                onPress={this.showDatePicker}
-              ></Button>
-              <DateTimePickerModal
-                isVisible={this.state.datePickerVisible}
-                mode="date"
-                onConfirm={this.handleConfirmDate}
-                onCancel={this.hideDatePicker}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Button
-                title={`${this.state.time}`}
-                onPress={this.showTimePicker}
-              ></Button>
-              <DateTimePickerModal
-                headerTextIOS="Select time"
-                isVisible={this.state.timePickerVisible}
-                mode="time"
-                locale="en_GB"
-                onConfirm={this.handleConfirmTime}
-                onCancel={this.hideTimePicker}
-              />
-            </View>
+            <TouchableOpacity onPress={this.showDatePicker}>
+              <View style={styles.inputContainer}>
+                <Text style={{ marginLeft: 16, fontSize: 16 }}>
+                  {this.state.date}
+                </Text>
+                <DateTimePickerModal
+                  isVisible={this.state.datePickerVisible}
+                  mode="date"
+                  onConfirm={this.handleConfirmDate}
+                  onCancel={this.hideDatePicker}
+                />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.showTimePicker}>
+              <View style={styles.inputContainer}>
+                <Text style={{ marginLeft: 16, fontSize: 16 }}>
+                  {this.state.time}
+                </Text>
+                <DateTimePickerModal
+                  headerTextIOS="Select time"
+                  isVisible={this.state.timePickerVisible}
+                  mode="time"
+                  locale="en_GB"
+                  onConfirm={this.handleConfirmTime}
+                  onCancel={this.hideTimePicker}
+                />
+              </View>
+            </TouchableOpacity>
             <View style={styles.desContainer}>
               <TextInput
                 style={styles.desInputs}

@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
     color: "#333333",
     padding: 15
   },
+  countDownView: {
+    alignSelf: "flex-end",
+    position: "absolute",
+    bottom: 15
+  },
   countDownTimer: {
     alignSelf: "flex-end",
     paddingBottom: 10,
