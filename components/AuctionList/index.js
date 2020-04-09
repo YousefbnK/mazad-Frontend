@@ -19,19 +19,22 @@ class AuctionList extends Component {
   render() {
     console.log("CATID", this.props.navigation.getParam("catId"));
     console.log("Auctions", auctionStore.auctions);
-
-    const auctions = auctionStore.auctions.map(auction => (
-      <AuctionItem
-        item={auction}
-        navigation={this.props.navigation}
-        key={auction.title}
-      />
-    ));
-    return (
-      <View>
-        <ScrollView>{auctions}</ScrollView>
-      </View>
-    );
+    if (auctionStore.loadingAuc) {
+      return <Text>Loading</Text>;
+    } else {
+      const auctions = auctionStore.auctions.map(auction => (
+        <AuctionItem
+          item={auction}
+          navigation={this.props.navigation}
+          key={auction.title}
+        />
+      ));
+      return (
+        <View>
+          <ScrollView>{auctions}</ScrollView>
+        </View>
+      );
+    }
   }
 }
 

@@ -33,6 +33,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "Arial",
     color: "white"
+  },
+  addItemsView: {
+    alignSelf: "flex-start",
+    position: "absolute",
+    bottom: 8
+  },
+  addItemsText: {
+    fontFamily: "Arial",
+    fontSize: 15,
+    textAlign: "left",
+    color: "#333333",
+    bottom: -3,
+    marginLeft: -20
   }
 });
 

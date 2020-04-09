@@ -12,19 +12,23 @@ import auctionStore from "../../stores/auctionStore";
 import CategoryItem from "./CategoryItem";
 
 const CategoriesList = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.grid}
-        numColumns={2}
-        data={auctionStore.categories}
-        keyExtractor={(items, index) => index.toString()}
-        renderItem={item => (
-          <CategoryItem item={item} navigation={navigation} />
-        )}
-      />
-    </View>
-  );
+  if (auctionStore.loadingCat) {
+    return <Text>Loading</Text>;
+  } else {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          contentContainerStyle={styles.grid}
+          numColumns={2}
+          data={auctionStore.categories}
+          keyExtractor={(items, index) => index.toString()}
+          renderItem={item => (
+            <CategoryItem item={item} navigation={navigation} />
+          )}
+        />
+      </View>
+    );
+  }
 };
 
 export default observer(CategoriesList);

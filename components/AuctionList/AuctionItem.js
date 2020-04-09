@@ -4,6 +4,7 @@ import CountDown from "react-native-countdown-component";
 //Styles
 import { Text, View, TouchableOpacity } from "react-native";
 import styles from "./styles";
+import ItemAddButton from "../Buttons/ItemAddButton";
 
 class AuctionItem extends Component {
   state = {
@@ -36,14 +37,18 @@ class AuctionItem extends Component {
         >
           <Text style={styles.auctionName}>{this.props.item.title}</Text>
 
-          <CountDown
-            style={styles.countDownTimer}
-            until={this.startTime()}
-            onFinish={() => this.setState({ auctionStart: false })}
-            size={15}
-            digitStyle={{ backgroundColor: "#FFF" }}
-            digitTxtStyle={{ color: "#1CC625" }}
-          />
+          <View style={styles.countDownView}>
+            <CountDown
+              style={styles.countDownTimer}
+              until={this.startTime()}
+              onFinish={() => this.setState({ auctionStart: false })}
+              size={15}
+              digitStyle={{ backgroundColor: "#FFF" }}
+              digitTxtStyle={{ color: "#1CC625" }}
+            />
+          </View>
+
+          <ItemAddButton />
         </View>
       </TouchableOpacity>
     );
