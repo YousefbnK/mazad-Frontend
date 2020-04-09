@@ -67,8 +67,7 @@ class HomeScreen extends Component {
 }
 
 HomeScreen.navigationOptions = {
-  title: "Home",
-  headerRight: <Text>Hii</Text>
+  title: "Home"
 };
 
 export default HomeScreen;

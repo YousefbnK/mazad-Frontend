@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 
 //Style
-import { View, ScrollView, Text } from "react-native";
+import { View, ScrollView } from "react-native";
 
 //Stores
 import auctionStore from "../../stores/auctionStore";
