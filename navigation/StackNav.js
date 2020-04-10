@@ -16,7 +16,7 @@ const StackNav = createStackNavigator(
     Register: Register,
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: "HomeScreen",
     defaultNavigationOptions: {
       gesturesEnabled: false,
     },

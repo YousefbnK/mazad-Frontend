@@ -45,7 +45,7 @@ class AuctionStore {
     }
   };
 
-  submitBids = async bid => {
+  submitBids = async (bid) => {
     try {
       await instance.post("", bid);
     } catch (err) {
@@ -59,7 +59,7 @@ decorate(AuctionStore, {
   auctions: observable,
   auctionItem: observable,
   loadingCat: observable,
-  loadingAuc: observable
+  loadingAuc: observable,
 });
 
 const auctionStore = new AuctionStore();

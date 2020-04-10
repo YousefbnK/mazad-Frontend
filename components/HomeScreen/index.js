@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Spinner } from "native-base";
 import CountDown from "react-native-countdown-component";
+import { observer } from "mobx-react";
 
 //Style
 import {
@@ -7,18 +9,19 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  View
+  View,
 } from "react-native";
 import styles from "./styles";
 
-//Data
+//Stores
+import auctionStore from "../../stores/auctionStore";
 
 //Components
 import CategoriesList from "./CategoriesList";
 
 class HomeScreen extends Component {
   state = {
-    timerFinish: false
+    timerFinish: false,
   };
 
   handlePress = () => {
@@ -28,46 +31,59 @@ class HomeScreen extends Component {
       alert("more patience required");
     }
   };
+
+  startTime = () => {
+    const now = +new Date();
+    const date = +new Date(auctionStore.auctions[0].start_date);
+    const diff = date - now;
+    const seconds = diff / 1000;
+    return seconds;
+  };
+
   render() {
-    return (
-      <ScrollView>
-        {!this.state.timerFinish && (
-          <Text style={styles.categoryTitle}>
-            The next Auction is starting in:
-          </Text>
-        )}
+    if (auctionStore.loadingAuc) {
+      return <Spinner />;
+    } else {
+      return (
+        <ScrollView>
+          {!this.state.timerFinish && (
+            <Text style={styles.categoryTitle}>
+              The next Auction is starting in:
+            </Text>
+          )}
+          <CountDown
+            style={{ marginTop: 30 }}
+            digitStyle={{
+              backgroundColor: "#FFF",
+              borderWidth: 2,
+              borderColor: "#1CC625",
+            }}
+            digitTxtStyle={{ color: "#1CC625" }}
+            separatorStyle={{ color: "#1CC625" }}
+            until={this.startTime()}
+            onFinish={() => this.setState({ timerFinish: true })}
+            onPress={() => this.props.navigation.navigate("AuctionList")}
+            size={30}
+          />
 
-        <CountDown
-          style={{ marginTop: 30 }}
-          digitStyle={{
-            backgroundColor: "#FFF",
-            borderWidth: 2,
-            borderColor: "#1CC625"
-          }}
-          digitTxtStyle={{ color: "#1CC625" }}
-          separatorStyle={{ color: "#1CC625" }}
-          timeLabels={{ d: "days", h: "hours", m: "mins", s: "sec" }}
-          showSeparator
-          until={1200000}
-          onFinish={() => this.setState({ timerFinish: true })}
-          onPress={() => alert("Hello")}
-          size={30}
-        />
+          {this.state.timerFinish && (
+            <TouchableOpacity onPress={this.handlePress}>
+              <Text style={styles.categoryTitle}>
+                {" "}
+                Take me to the Auction !
+              </Text>
+            </TouchableOpacity>
+          )}
 
-        {this.state.timerFinish && (
-          <TouchableOpacity onPress={this.handlePress}>
-            <Text style={styles.categoryTitle}> Take me to the Auction !</Text>
-          </TouchableOpacity>
-        )}
-
-        <CategoriesList navigation={this.props.navigation} />
-      </ScrollView>
-    );
+          <CategoriesList navigation={this.props.navigation} />
+        </ScrollView>
+      );
+    }
   }
 }
 
 HomeScreen.navigationOptions = {
-  title: "Home"
+  title: "Home",
 };
 
-export default HomeScreen;
+export default observer(HomeScreen);

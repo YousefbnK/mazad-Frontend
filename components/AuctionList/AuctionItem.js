@@ -8,7 +8,7 @@ import ItemAddButton from "../Buttons/ItemAddButton";
 
 class AuctionItem extends Component {
   state = {
-    auctionStart: true
+    auctionStart: true,
   };
 
   startAuction = () => {
@@ -18,6 +18,8 @@ class AuctionItem extends Component {
   };
 
   startTime = () => {
+    console.log("auctionsauctions_date", this.props.item.start_date);
+
     const now = +new Date();
     const date = +new Date(this.props.item.start_date);
     const diff = date - now;
