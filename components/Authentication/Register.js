@@ -3,6 +3,7 @@ import React, { Component } from "react";
 //Styles
 import styles from "./styles";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Container, CheckBox, Body, ListItem } from "native-base";
 
 //Stores
 import authStore from "../../stores/authStore";
@@ -14,10 +15,12 @@ class Register extends Component {
     last_name: "",
     email: "",
     password: "",
-    vender: false
+    vender: false,
   };
 
   handlePress = () => this.props.navigation.navigate("Login");
+
+  handleCheckBox = () => this.setState({ vender: !this.state.vender });
 
   submitRegister = () => authStore.register(this.state, this.props.navigation);
 
@@ -28,7 +31,7 @@ class Register extends Component {
           <TextInput
             style={styles.inputs}
             placeholder="First Name"
-            onChangeText={first_name => this.setState({ first_name })}
+            onChangeText={(first_name) => this.setState({ first_name })}
           />
         </View>
 
@@ -36,7 +39,7 @@ class Register extends Component {
           <TextInput
             style={styles.inputs}
             placeholder="Last Name"
-            onChangeText={last_name => this.setState({ last_name })}
+            onChangeText={(last_name) => this.setState({ last_name })}
           />
         </View>
 
@@ -45,7 +48,7 @@ class Register extends Component {
             style={styles.inputs}
             placeholder="Email"
             keyboardType="email-address"
-            onChangeText={email => this.setState({ email })}
+            onChangeText={(email) => this.setState({ email })}
           />
         </View>
 
@@ -53,7 +56,7 @@ class Register extends Component {
           <TextInput
             style={styles.inputs}
             placeholder="Username"
-            onChangeText={username => this.setState({ username })}
+            onChangeText={(username) => this.setState({ username })}
           />
         </View>
 
@@ -62,9 +65,21 @@ class Register extends Component {
             style={styles.inputs}
             placeholder="Password"
             secureTextEntry={true}
-            onChangeText={password => this.setState({ password })}
+            onChangeText={(password) => this.setState({ password })}
           />
         </View>
+
+        <View>
+          <ListItem>
+            <CheckBox
+              checked={this.state.vender}
+              onPress={this.handleCheckBox}
+            />
+
+            <Text>Register as a vender</Text>
+          </ListItem>
+        </View>
+
         <TouchableOpacity
           style={[styles.buttonContainer, styles.loginButton]}
           onPress={this.submitRegister}
