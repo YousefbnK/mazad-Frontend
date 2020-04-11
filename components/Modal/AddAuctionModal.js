@@ -5,7 +5,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Modal, {
   ModalContent,
   ModalFooter,
-  ModalButton
+  ModalButton,
 } from "react-native-modals";
 import { View, TextInput, Button, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
@@ -14,15 +14,16 @@ class AddAuctionModal extends Component {
   state = {
     datePickerVisible: false,
     timePickerModal: false,
-    date: new Date().toLocaleDateString(),
-    time: new Date().toLocaleTimeString("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit"
-    }),
+    displayDate: new Date().toLocaleString(),
+    // time: new Date().toLocaleTimeString("en-GB", {
+    //   hour: "2-digit",
+    //   minute: "2-digit",
+    // }),
     title: "",
     description: "",
+    start_date: "",
     vender: "",
-    category: ""
+    category: "",
   };
 
   showDatePicker = () => {
@@ -41,17 +42,27 @@ class AddAuctionModal extends Component {
     this.setState({ timePickerVisible: false });
   };
 
-  handleConfirmDate = date => {
-    this.setState({ date: date });
+  handleConfirmDate = (date) => {
+    this.setState({ start_date: date.toISOString() });
+    this.setState({ displayDate: date.toLocaleString() });
     this.hideDatePicker();
   };
 
-  handleConfirmTime = time => {
-    this.setState({ time: time });
-    this.hideTimePicker();
-  };
+  // handleConfirmTime = (time) => {
+  //   this.setState({ time: time });
+  //   this.hideTimePicker();
+  // };
 
-  submitAuction = () => {};
+  submitAuction = () => {
+    state = this.state;
+    AuctionObj = {
+      title: this.state.title,
+      description: this.state.description,
+      start_date: this.state.start_date,
+      category: 1,
+    };
+    console.log(AuctionObj);
+  };
 
   render() {
     console.log("PROPS", this.props.state);
@@ -74,23 +85,24 @@ class AddAuctionModal extends Component {
               <TextInput
                 style={styles.inputs}
                 placeholder="title"
-                onChangeText={title => this.setState({ title })}
+                onChangeText={(title) => this.setState({ title })}
               />
             </View>
             <TouchableOpacity onPress={this.showDatePicker}>
               <View style={styles.inputContainer}>
                 <Text style={{ marginLeft: 16, fontSize: 16 }}>
-                  {this.state.date}
+                  {this.state.displayDate}
                 </Text>
                 <DateTimePickerModal
+                  headerTextIOS="Select date & time"
                   isVisible={this.state.datePickerVisible}
-                  mode="date"
+                  mode="datetime"
                   onConfirm={this.handleConfirmDate}
                   onCancel={this.hideDatePicker}
                 />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.showTimePicker}>
+            {/* <TouchableOpacity onPress={this.showTimePicker}>
               <View style={styles.inputContainer}>
                 <Text style={{ marginLeft: 16, fontSize: 16 }}>
                   {this.state.time}
@@ -104,14 +116,14 @@ class AddAuctionModal extends Component {
                   onCancel={this.hideTimePicker}
                 />
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={styles.desContainer}>
               <TextInput
                 style={styles.desInputs}
                 placeholder="description"
                 multiline={true}
                 underlineColorAndroid="transparent"
-                onChangeText={description => this.setState({ description })}
+                onChangeText={(description) => this.setState({ description })}
               />
             </View>
           </ModalContent>

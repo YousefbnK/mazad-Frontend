@@ -18,8 +18,6 @@ class AuctionItem extends Component {
   };
 
   startTime = () => {
-    console.log("auctionsauctions_date", this.props.item.start_date);
-
     const now = +new Date();
     const date = +new Date(this.props.item.start_date);
     const diff = date - now;
