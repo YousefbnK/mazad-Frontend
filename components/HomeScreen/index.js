@@ -18,6 +18,7 @@ import auctionStore from "../../stores/auctionStore";
 
 //Components
 import CategoriesList from "./CategoriesList";
+import RegisterationButton from "../Buttons/RegisterationButton";
 
 class HomeScreen extends Component {
   state = {
@@ -56,10 +57,10 @@ class HomeScreen extends Component {
             digitStyle={{
               backgroundColor: "#FFF",
               borderWidth: 2,
-              borderColor: "#1CC625",
+              borderColor: "#3CB371",
             }}
-            digitTxtStyle={{ color: "#1CC625" }}
-            separatorStyle={{ color: "#1CC625" }}
+            digitTxtStyle={{ color: "#3CB371" }}
+            separatorStyle={{ color: "#3CB371" }}
             until={this.startTime()}
             onFinish={() => this.setState({ timerFinish: true })}
             onPress={() => this.props.navigation.navigate("AuctionList")}
@@ -84,6 +85,8 @@ class HomeScreen extends Component {
 
 HomeScreen.navigationOptions = {
   title: "Home",
+
+  headerRight: <RegisterationButton />,
 };
 
 export default observer(HomeScreen);
