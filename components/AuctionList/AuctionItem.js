@@ -8,7 +8,7 @@ import ItemAddButton from "../Buttons/ItemAddButton";
 
 class AuctionItem extends Component {
   state = {
-    auctionStart: true
+    auctionStart: true,
   };
 
   startAuction = () => {

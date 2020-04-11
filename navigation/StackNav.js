@@ -13,13 +13,13 @@ const StackNav = createStackNavigator(
     AuctionList: AuctionList,
     BiddingScreen: BiddingScreen,
     Login: Login,
-    Register: Register
+    Register: Register,
   },
   {
     initialRouteName: "HomeScreen",
     defaultNavigationOptions: {
-      gesturesEnabled: false
-    }
+      gesturesEnabled: false,
+    },
   }
 );
 

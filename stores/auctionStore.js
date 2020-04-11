@@ -34,6 +34,14 @@ class AuctionStore {
     }
   };
 
+  createAuctions = async (auction) => {
+    try {
+      await instance.get("auction/create", auction);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   fetchAuctionItems = async () => {
     try {
       const res = await instance.get("");
@@ -45,7 +53,7 @@ class AuctionStore {
     }
   };
 
-  submitBids = async bid => {
+  submitBids = async (bid) => {
     try {
       await instance.post("", bid);
     } catch (err) {
@@ -59,7 +67,7 @@ decorate(AuctionStore, {
   auctions: observable,
   auctionItem: observable,
   loadingCat: observable,
-  loadingAuc: observable
+  loadingAuc: observable,
 });
 
 const auctionStore = new AuctionStore();

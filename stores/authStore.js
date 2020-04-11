@@ -6,7 +6,7 @@ import { instance } from "./instance";
 class AuthStore {
   user = null;
 
-  setUser = async token => {
+  setUser = async (token) => {
     if (token) {
       // Save token to localStorage
       await AsyncStorage.setItem("myToken", token);
@@ -70,7 +70,7 @@ class AuthStore {
 }
 
 decorate(AuthStore, {
-  user: observable
+  user: observable,
 });
 
 const authStore = new AuthStore();
