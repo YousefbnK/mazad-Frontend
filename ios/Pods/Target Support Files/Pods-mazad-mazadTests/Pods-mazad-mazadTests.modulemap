@@ -1,0 +1,6 @@
+module Pods_mazad_mazadTests {
+  umbrella header "Pods-mazad-mazadTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
