@@ -34,6 +34,14 @@ class AuctionStore {
     }
   };
 
+  createAuctions = async (auction) => {
+    try {
+      await instance.get("auction/create", auction);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   fetchAuctionItems = async () => {
     try {
       const res = await instance.get("");

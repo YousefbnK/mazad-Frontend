@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
+//Stores
+import auctionStore from "../../stores/auctionStore";
+
 //Style
 import Modal, {
   ModalContent,
@@ -13,16 +16,10 @@ import styles from "./styles";
 class AddAuctionModal extends Component {
   state = {
     datePickerVisible: false,
-    timePickerModal: false,
     displayDate: new Date().toLocaleString(),
-    // time: new Date().toLocaleTimeString("en-GB", {
-    //   hour: "2-digit",
-    //   minute: "2-digit",
-    // }),
     title: "",
     description: "",
-    start_date: "",
-    vender: "",
+    start_date: new Date().toISOString(),
     category: "",
   };
 
@@ -34,38 +31,25 @@ class AddAuctionModal extends Component {
     this.setState({ datePickerVisible: false });
   };
 
-  showTimePicker = () => {
-    this.setState({ timePickerVisible: true });
-  };
-
-  hideTimePicker = () => {
-    this.setState({ timePickerVisible: false });
-  };
-
   handleConfirmDate = (date) => {
     this.setState({ start_date: date.toISOString() });
     this.setState({ displayDate: date.toLocaleString() });
     this.hideDatePicker();
   };
 
-  // handleConfirmTime = (time) => {
-  //   this.setState({ time: time });
-  //   this.hideTimePicker();
-  // };
-
   submitAuction = () => {
-    state = this.state;
-    AuctionObj = {
+    const auctionObj = {
       title: this.state.title,
       description: this.state.description,
       start_date: this.state.start_date,
       category: 1,
+      //  ----- change catagory to take the catagory of the auction list  -----
     };
-    console.log(AuctionObj);
+    auctionStore.createAuctions(auctionObj);
+    this.props.closeModal();
   };
 
   render() {
-    console.log("PROPS", this.props.state);
     return (
       <View>
         <Modal
@@ -102,21 +86,6 @@ class AddAuctionModal extends Component {
                 />
               </View>
             </TouchableOpacity>
-            {/* <TouchableOpacity onPress={this.showTimePicker}>
-              <View style={styles.inputContainer}>
-                <Text style={{ marginLeft: 16, fontSize: 16 }}>
-                  {this.state.time}
-                </Text>
-                <DateTimePickerModal
-                  headerTextIOS="Select time"
-                  isVisible={this.state.timePickerVisible}
-                  mode="time"
-                  locale="en_GB"
-                  onConfirm={this.handleConfirmTime}
-                  onCancel={this.hideTimePicker}
-                />
-              </View>
-            </TouchableOpacity> */}
             <View style={styles.desContainer}>
               <TextInput
                 style={styles.desInputs}
