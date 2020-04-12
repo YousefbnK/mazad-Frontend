@@ -2,15 +2,20 @@ import React, { Component } from "react";
 import { TouchableHighlight, Text, View } from "react-native";
 import { Badge } from "native-base";
 import { observer } from "mobx-react";
+import { withNavigation } from "react-navigation";
 
 //Style
 import styles from "./styles";
 import authStore from "../../stores/authStore";
 
 class RegisterationButton extends Component {
-  handlelogin = () => {};
+  handlelogin = () => {
+    this.props.navigation.navigate("Login");
+  };
 
-  handlelogout = () => {};
+  handlelogout = () => {
+    authStore.logout();
+  };
 
   render() {
     if (authStore.user) {
@@ -37,4 +42,4 @@ class RegisterationButton extends Component {
   }
 }
 
-export default observer(RegisterationButton);
+export default withNavigation(observer(RegisterationButton));

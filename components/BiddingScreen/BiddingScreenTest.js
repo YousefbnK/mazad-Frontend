@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import io from "socket.io-client";
 import NumericInput from "react-native-numeric-input";
-import { LivePlayer } from "react-native-live-stream";
+// import { LivePlayer } from "react-native-live-stream";
 
 //Styles
 import styles from "./styles";
@@ -39,7 +39,7 @@ class BiddingScreen extends Component {
     });
     return (
       <ScrollView>
-        <View>
+        {/* <View>
           <LivePlayer
             style={styles.image}
             source={{
@@ -54,9 +54,12 @@ class BiddingScreen extends Component {
             muted={false}
             bufferTime={300}
             maxBufferTime={1000}
-            resizeMode={"contain"}
+            onLoading={() => {}}
+            onLoad={() => {}}
+            onEnd={() => {}}
+            // resizeMode={"contain"}
           />
-        </View>
+        </View> */}
         <View style={styles.info}>
           {this.state.currentBid < 1 && (
             <Text style={styles.initialPrice}>
