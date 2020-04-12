@@ -5,6 +5,7 @@ import { instance } from "./instance";
 
 class AuthStore {
   user = null;
+  is_vender = null;
 
   setUser = async (token) => {
     if (token) {
@@ -16,8 +17,10 @@ class AuthStore {
       this.user = jwt_decode(token);
     } else {
       await AsyncStorage.removeItem("myToken");
+      await AsyncStorage.removeItem("is_vender");
       delete instance.defaults.headers.common.Authorization;
       this.user = null;
+      this.is_vender = null;
     }
   };
 
@@ -26,6 +29,8 @@ class AuthStore {
       const res = await instance.post("login/", userData);
       const user = res.data;
       console.log("User logged in", user);
+      this.is_vender = res.data.is_vender;
+      await AsyncStorage.setItem("is_vender", JSON.stringify(this.is_vender));
       await this.setUser(user.access);
       navigation.navigate("HomeScreen");
     } catch (err) {
@@ -53,8 +58,8 @@ class AuthStore {
 
   checkForToken = async () => {
     const token = await AsyncStorage.getItem("myToken");
-
-    if (token) {
+    const is_vender = await JSON.parse(AsyncStorage.getItem("is_vender"));
+    if (token && is_vender) {
       const currentTime = Date.now() / 1000;
       // Decode token and get user info
       const user = jwt_decode(token);
@@ -62,6 +67,7 @@ class AuthStore {
       if (user.exp >= currentTime) {
         // Set auth token header
         await this.setUser(token);
+        this.is_vender = is_vender;
       } else {
         this.setUser();
       }
