@@ -4,9 +4,7 @@ import React from "react";
 import styles from "./styles";
 import { Text, Image, View, TouchableOpacity } from "react-native";
 
-const CategoryItem = props => {
-  console.log("CATz", props);
-
+const CategoryItem = (props) => {
   const navigate = () => {
     props.navigation.navigate("AuctionList", { catId: props.item.item.name });
   };
