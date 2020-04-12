@@ -28,6 +28,7 @@ class ItemAddButton extends Component {
           <ItemAddModal
             state={this.state.modalVisible}
             closeModal={this.closeModal}
+            auctionID={this.props.auctionID}
           />
           <Button transparent onPress={this.openModal}>
             <Icon style={{ color: "grey" }} name="plus-square" type="Feather" />

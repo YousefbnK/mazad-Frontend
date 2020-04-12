@@ -36,7 +36,15 @@ class AuctionStore {
 
   createAuctions = async (auction) => {
     try {
-      await instance.get("auction/create", auction);
+      await instance.post("auction/create", auction);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  createItems = async (x) => {
+    try {
+      await instance.post("item/create", x);
     } catch (err) {
       console.error(err);
     }
