@@ -45,8 +45,9 @@ class AuthStore {
       const res = await instance.post("register/", userData);
       const data = res.data;
       console.log("User registered", data);
-      await this.setUser(data.access);
-      navigation.navigate("HomeScreen");
+      this.login(userData, navigation);
+      // await this.setUser(data.access);
+      // navigation.navigate("HomeScreen");
     } catch (error) {
       console.error(error);
     }
