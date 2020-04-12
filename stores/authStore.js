@@ -46,8 +46,6 @@ class AuthStore {
       const data = res.data;
       console.log("User registered", data);
       this.login(userData, navigation);
-      // await this.setUser(data.access);
-      // navigation.navigate("HomeScreen");
     } catch (error) {
       console.error(error);
     }
