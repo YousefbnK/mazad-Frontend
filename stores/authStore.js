@@ -31,6 +31,7 @@ class AuthStore {
       console.log("User logged in", user);
       this.is_vender = res.data.is_vender;
       await AsyncStorage.setItem("is_vender", JSON.stringify(this.is_vender));
+
       await this.setUser(user.access);
       navigation.navigate("HomeScreen");
     } catch (err) {
@@ -58,7 +59,7 @@ class AuthStore {
 
   checkForToken = async () => {
     const token = await AsyncStorage.getItem("myToken");
-    const is_vender = await JSON.parse(AsyncStorage.getItem("is_vender"));
+    const is_vender = JSON.parse(await AsyncStorage.getItem("is_vender"));
     if (token && is_vender) {
       const currentTime = Date.now() / 1000;
       // Decode token and get user info
