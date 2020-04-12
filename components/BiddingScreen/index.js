@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import io from "socket.io-client";
 import NumericInput from "react-native-numeric-input";
+import { NodeCameraView } from "react-native-nodemediaclient";
 
 //Styles
 import styles from "./styles";
-import { Text, View, Image, ScrollView, TextInput } from "react-native";
+import { Text, View, Image, ScrollView, TextInput, Button } from "react-native";
 import { Shake } from "react-native-motion";
 
 //Stores
@@ -16,7 +17,7 @@ class BiddingScreen extends Component {
   state = {
     bid: 0,
     currentBid: 0,
-    shake: true
+    shake: true,
   };
 
   socket = io.connect("http://127.0.0.1:8001");
@@ -25,24 +26,45 @@ class BiddingScreen extends Component {
     this.socket;
   }
 
-  submitCurrentBid = bid => {
+  submitCurrentBid = (bid) => {
     this.socket.emit("Bid", bid);
     this.setState({ bid: this.state.currentBid });
   };
 
   setTimeout = () => this.setState({ shake: !this.state.shake });
 
+  start = () => {
+    this.refs(this.vb.start());
+  };
+
   render() {
-    this.socket.on("Bid", bid => {
+    this.socket.on("Bid", (bid) => {
       this.setState({ currentBid: bid });
     });
+
     return (
       <ScrollView>
-        <View>
-          <Image
-            style={styles.image}
-            source={{ uri: `${auctionStore.auctionItem[0].image}` }}
-          />
+        <NodeCameraView
+          style={styles.nodeCameraView}
+          ref={(vb) => {
+            this.vb = vb;
+          }}
+          outputUrl={
+            "rtmp://live.mux.com/app/1c26beba-471e-42a2-132f-e33b53dd4978"
+          }
+          camera={{ cameraId: 1, cameraFrontMirror: true }}
+          audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
+          video={{
+            preset: 12,
+            bitrate: 400000,
+            profile: 1,
+            fps: 15,
+            videoFrontMirror: false,
+          }}
+          autopreview={true}
+        />
+        <View style={{ margin: 70 }}>
+          <Button onPress={this.start} title="Publish" color="#841584" />
         </View>
         <View style={styles.info}>
           {this.state.currentBid < 1 && (
@@ -52,9 +74,6 @@ class BiddingScreen extends Component {
           )}
           <Text style={styles.currentBid}>
             Current bid: {this.state.currentBid} KD
-          </Text>
-          <Text style={styles.description}>
-            {auctionStore.auctionItem[0].description}
           </Text>
           <View style={styles.textInput}>
             <Shake value={this.state.shake} type="timing">
@@ -67,13 +86,12 @@ class BiddingScreen extends Component {
                 reachMinIncIconStyle={{ marginTop: 15 }}
                 reachMinDecIconStyle={{ color: "white" }}
                 step={auctionStore.auctionItem[0].startBid / 10}
-                onChange={bid => {
+                onChange={(bid) => {
                   this.setState({ bid });
                 }}
               />
             </Shake>
           </View>
-
           <BidButton
             bid={this.state.bid}
             submitBid={this.submitCurrentBid}
@@ -90,7 +108,7 @@ class BiddingScreen extends Component {
 BiddingScreen.navigationOptions = {
   headerTransparent: "true",
   swipeEnabled: false,
-  headerLeft: null
+  headerLeft: null,
 };
 
 export default observer(BiddingScreen);

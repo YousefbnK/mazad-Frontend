@@ -5997,6 +5997,11 @@ react-native-motion@^1.0.5:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-nodemediaclient@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-nodemediaclient/-/react-native-nodemediaclient-0.1.6.tgz#fe7be11f4fc0544496d841efdbad534ec92900f2"
+  integrity sha512-4JFaW/xKpx+2/d3YkZIZGG+s6eOCWNV9FLtdKwp7La7FiR0noqhLMK9Pw+wPS7UhjyTw/VV+JVfkPu4NyJYVlw==
+
 react-native-numeric-input@^1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/react-native-numeric-input/-/react-native-numeric-input-1.8.3.tgz#e869aa1b60d0c38b92e84e44bb28944f48b4ccd3"

@@ -7,9 +7,9 @@ import AuctionNav from "./AuctionNav";
 import HomeStack from "./HomeStack";
 
 const SwitchNav = createSwitchNavigator({
-  // BottomTabNav: BottomTabNav,
-  // HomeScreen: HomeStack,
-  // AuctionNav: AuctionNav,
+  BottomTabNav: BottomTabNav,
+  HomeScreen: HomeStack,
+  AuctionNav: AuctionNav,
   StackNav: StackNav,
 });
 
