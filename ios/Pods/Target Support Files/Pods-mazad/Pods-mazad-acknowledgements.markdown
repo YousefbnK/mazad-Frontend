@@ -212,6 +212,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    END OF TERMS AND CONDITIONS
 
 
+## NodeMediaClient
+
+Copyright 2020 NodeMedia Ltd. All rights reserved.
+
 ## RNDateTimePicker
 
 MIT License

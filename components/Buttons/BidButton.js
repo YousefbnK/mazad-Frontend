@@ -7,7 +7,7 @@ import auctionStore from "../../stores/auctionStore";
 import { observer } from "mobx-react";
 import authStore from "../../stores/authStore";
 
-const BidButton = props => {
+const BidButton = (props) => {
   const submitBid = () => {
     if (authStore.user) {
       if (

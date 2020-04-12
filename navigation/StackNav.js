@@ -13,7 +13,7 @@ const StackNav = createStackNavigator(
     HomeScreen: HomeScreen,
     AuctionList: AuctionList,
     BiddingScreen: BiddingScreen,
-    Test: BiddingScreenTest,
+    // Test: BiddingScreenTest,
     Login: Login,
     Register: Register,
   },
