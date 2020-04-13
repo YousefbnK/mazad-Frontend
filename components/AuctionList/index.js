@@ -16,10 +16,10 @@ class AuctionList extends Component {
   state = {
     catName: this.props.navigation.getParam("catId"),
   };
-
+  filterAauction = auctionStore.auctions;
   render() {
-    // console.log("CATID", this.props.navigation.getParam("catId"));
-    // console.log("Auctions", auctionStore.auctions);
+    console.log("CATID", this.props.navigation.getParam("catId"));
+    console.log("Auctions", auctionStore.auctions);
     if (auctionStore.loadingAuc) {
       return <Spinner />;
     } else {
