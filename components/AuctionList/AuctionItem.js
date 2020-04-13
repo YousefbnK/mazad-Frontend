@@ -10,7 +10,7 @@ class AuctionItem extends Component {
   state = {
     auctionStart: true,
     auctionID: this.props.item.id,
-    venderID: this.props.item.vender,
+    venderID: this.props.item.user,
   };
 
   startAuction = () => {
