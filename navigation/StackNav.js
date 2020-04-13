@@ -9,19 +9,13 @@ import Register from "../components/Authentication/Register";
 import BiddingScreenTest from "../components/BiddingScreen/BiddingScreenTest";
 import Profile from "../components/Profile";
 
-const StackNav = createStackNavigator(
-  {
-    HomeScreen: HomeScreen,
-    AuctionList: AuctionList,
-    BiddingScreen: BiddingScreen,
-    // Test: BiddingScreenTest,
-    Login: Login,
-    Register: Register,
-    Profile: Profile,
-  },
-  {
-    initialRouteName: "HomeScreen",
-  }
-);
+const StackNav = createStackNavigator({
+  Profile: Profile,
+  Login: Login,
+  Register: Register,
+  AuctionList: AuctionList,
+  BiddingScreen: BiddingScreen,
+  // Test: BiddingScreenTest,
+});
 
 export default StackNav;
