@@ -31,9 +31,8 @@ class AuthStore {
       console.log("User logged in", user);
       this.is_vender = res.data.is_vender;
       await AsyncStorage.setItem("is_vender", JSON.stringify(this.is_vender));
-
       await this.setUser(user.access);
-      navigation.navigate("HomeScreen");
+      navigation.goBack();
     } catch (err) {
       console.log(err);
       console.log("something went wrong logging in");
@@ -46,7 +45,7 @@ class AuthStore {
       const data = res.data;
       console.log("User registered", data);
       await this.setUser(data.access);
-      navigation.navigate("HomeScreen");
+      navigation.goBack();
     } catch (error) {
       console.error(error);
     }
