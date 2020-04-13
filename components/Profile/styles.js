@@ -43,6 +43,20 @@ const styles = StyleSheet.create({
     marginRight: 18,
     width: 34,
   },
+  title: {
+    color: "black",
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 40,
+  },
+  profileText: {
+    color: "black",
+    fontSize: 20,
+    textAlign: "center",
+    margin: 20,
+    textDecorationLine: "underline",
+  },
 });
 
 export default styles;
