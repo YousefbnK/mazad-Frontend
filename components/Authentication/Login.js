@@ -60,6 +60,7 @@ class Login extends Component {
 
 Login.navigationOptions = {
   headerTransparent: "true",
+  headerLeft: null,
 };
 
 export default Login;

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#2cd18a",
     position: "absolute",
     bottom: -120,
-    left: 20
+    left: 20,
   },
   containerAnon: {
     height: 50,
@@ -26,18 +26,18 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
     position: "absolute",
     bottom: -120,
-    left: 20
+    left: 20,
   },
   text: {
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: "Arial",
-    color: "white"
+    color: "white",
   },
   addItemsView: {
     alignSelf: "flex-start",
     position: "absolute",
-    bottom: 8
+    bottom: 8,
   },
   addItemsText: {
     fontFamily: "Arial",
@@ -45,8 +45,17 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: "#333333",
     bottom: -3,
-    marginLeft: -20
-  }
+    marginLeft: -20,
+  },
+  logout: {
+    justifyContent: "center",
+    backgroundColor: "grey",
+    borderRadius: 20,
+    width: 150,
+    height: 40,
+    margin: 30,
+    alignSelf: "center",
+  },
 });
 
 export default styles;
