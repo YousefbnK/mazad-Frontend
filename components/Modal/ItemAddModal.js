@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 // import ImagePicker from "react-native-image-picker";
-//  have to link it to nativ react-native link react-native-image-picker
+//  have to link it to nativ  => react-native link react-native-image-picker
 
 //Stores
 import auctionStore from "../../stores/auctionStore";
+
+//Components
+import ItemsCard from "./ItemsCard";
 
 //Style
 import Modal, {
@@ -11,7 +14,7 @@ import Modal, {
   ModalFooter,
   ModalButton,
 } from "react-native-modals";
-import { View, TextInput, Button, Text } from "react-native";
+import { View, TextInput, Button, ScrollView } from "react-native";
 import styles from "./styles";
 
 class ItemAddModal extends Component {
@@ -20,6 +23,7 @@ class ItemAddModal extends Component {
     start_price: "",
     auction: this.props.auctionID,
     image: null,
+    items: [],
   };
 
   handleChoosePhoto = () => {
@@ -32,12 +36,44 @@ class ItemAddModal extends Component {
   };
 
   submitAuction = () => {
-    const items = [this.state];
-    const submit = { items: items };
-    auctionStore.createItems(submit);
+    const toAddItems = { items: this.state.items };
+    console.log("toAddItems", toAddItems);
+    auctionStore.createItems(toAddItems);
+    this.props.closeModal();
+  };
+
+  AddItem = () => {
+    const state = this.state;
+    const item = {
+      name: state.name,
+      start_price: state.start_price,
+      auction: state.auction,
+      image: state.image,
+    };
+    this.setState({
+      items: state.items.concat([item]),
+    });
+  };
+
+  removeItem = (index) => {
+    const items = this.state.items.filter(
+      (item) => item !== this.state.items[index]
+    );
+    this.setState({ items });
   };
 
   render() {
+    const itemCard = this.state.items.map((item, index) => {
+      return (
+        <ItemsCard
+          item={item}
+          index={index}
+          removeItem={() => this.removeItem(index)}
+          key={item.name}
+        />
+      );
+    });
+
     return (
       <View>
         <Modal
@@ -71,9 +107,17 @@ class ItemAddModal extends Component {
             <View style={styles.inputContainer}>
               <Button
                 title="Choose Photo"
-                color="#1CC625"
+                color="#grey"
                 onPress={this.handleChoosePhoto}
               />
+            </View>
+
+            <View style={styles.fixToText}>
+              <Button title="add Item" color="black" onPress={this.AddItem} />
+            </View>
+
+            <View style={{ height: 300 }}>
+              <ScrollView>{itemCard}</ScrollView>
             </View>
           </ModalContent>
         </Modal>
