@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import io from "socket.io-client";
 import NumericInput from "react-native-numeric-input";
-import { NodeCameraView } from "react-native-nodemediaclient";
+// import { NodeCameraView } from "react-native-nodemediaclient";
 
 //Styles
 import styles from "./styles";
@@ -40,7 +40,7 @@ class BiddingScreen extends Component {
 
     return (
       <ScrollView>
-        <NodeCameraView
+        {/* <NodeCameraView
           style={styles.nodeCameraView}
           ref={(vb) => {
             this.vb = vb.start();
@@ -58,7 +58,7 @@ class BiddingScreen extends Component {
             videoFrontMirror: false,
           }}
           autopreview={true}
-        />
+        /> */}
         <View style={styles.info}>
           {this.state.currentBid < 1 && (
             <Text style={styles.initialPrice}>
