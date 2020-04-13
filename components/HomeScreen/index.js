@@ -85,8 +85,6 @@ class HomeScreen extends Component {
 
 HomeScreen.navigationOptions = {
   title: "Home",
-
-  headerRight: <RegisterationButton />,
 };
 
 export default observer(HomeScreen);

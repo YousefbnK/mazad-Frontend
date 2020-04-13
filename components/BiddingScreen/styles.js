@@ -4,13 +4,13 @@ const styles = StyleSheet.create({
   info: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 270
+    marginTop: 270,
   },
   description: {
     textAlign: "center",
     fontSize: 12,
     fontFamily: "Arial",
-    marginTop: 20
+    marginTop: 20,
   },
   initialPrice: {
     fontSize: 24,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 200,
     marginLeft: 20,
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
   },
   currentBid: {
     fontSize: 24,
@@ -26,19 +26,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     marginLeft: 20,
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
   },
   image: {
     ...StyleSheet.absoluteFillObject,
     width: "100%",
-    height: 450
+    height: 450,
   },
   textInput: {
     height: 50,
     bottom: -120,
     alignSelf: "flex-start",
     position: "absolute",
-    left: 40
+    left: 40,
   },
   shake: {
     height: 50,
@@ -48,8 +48,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     alignSelf: "flex-start",
     position: "absolute",
-    left: 20
-  }
+    left: 20,
+  },
+  nodeCameraView: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 });
 
 export default styles;

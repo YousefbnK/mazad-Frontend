@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import io from "socket.io-client";
 import NumericInput from "react-native-numeric-input";
-// import { LivePlayer } from "react-native-live-stream";
+import { NodeCameraView } from "react-native-nodemediaclient";
 
 //Styles
 import styles from "./styles";
@@ -39,27 +39,26 @@ class BiddingScreen extends Component {
     });
     return (
       <ScrollView>
-        {/* <View>
-          <LivePlayer
-            style={styles.image}
-            source={{
-              uri:
-                "rtmp://live.mux.com/app/1c26beba-471e-42a2-132f-e33b53dd4978",
-            }}
-            ref={(ref) => {
-              this.player = ref;
-            }}
-            style={styles.video}
-            paused={false}
-            muted={false}
-            bufferTime={300}
-            maxBufferTime={1000}
-            onLoading={() => {}}
-            onLoad={() => {}}
-            onEnd={() => {}}
-            // resizeMode={"contain"}
-          />
-        </View> */}
+        <NodeCameraView
+          style={styles.nodeCameraView}
+          ref={(vb) => {
+            this.vb = vb;
+          }}
+          outputUrl={
+            "rtmp://live.mux.com/app/1c26beba-471e-42a2-132f-e33b53dd4978"
+          }
+          camera={{ cameraId: 1, cameraFrontMirror: true }}
+          audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
+          video={{
+            preset: 12,
+            bitrate: 400000,
+            profile: 1,
+            fps: 15,
+            videoFrontMirror: false,
+          }}
+          autopreview={true}
+        />
+
         <View style={styles.info}>
           {this.state.currentBid < 1 && (
             <Text style={styles.initialPrice}>

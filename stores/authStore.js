@@ -5,6 +5,7 @@ import { instance } from "./instance";
 
 class AuthStore {
   user = null;
+  userData = [];
   is_vender = null;
   userID = null;
 
@@ -23,6 +24,7 @@ class AuthStore {
 
       delete instance.defaults.headers.common.Authorization;
       this.user = null;
+      this.userData = [];
       this.is_vender = null;
       this.userID = null;
     }
@@ -33,15 +35,17 @@ class AuthStore {
       const res = await instance.post("login/", userData);
       const user = res.data;
       console.log("User logged in", user);
-
+      this.userData.push({
+        email: user.email,
+        firstName: user.first_name,
+        lastName: user.last_name,
+      });
       this.is_vender = res.data.is_vender;
-      await AsyncStorage.setItem("is_vender", JSON.stringify(this.is_vender));
-
       this.userID = res.data.user_id;
+      await AsyncStorage.setItem("is_vender", JSON.stringify(this.is_vender));
       await AsyncStorage.setItem("userID", JSON.stringify(this.userID));
-
       await this.setUser(user.access);
-      navigation.navigate("HomeScreen");
+      navigation.goBack();
     } catch (err) {
       console.log(err);
       console.log("something went wrong logging in");
@@ -53,6 +57,8 @@ class AuthStore {
       const res = await instance.post("register/", userData);
       const data = res.data;
       console.log("User registered", data);
+      await this.setUser(data.access);
+      navigation.navigate("Home");
       this.login(userData, navigation);
     } catch (error) {
       console.error(error);
@@ -89,6 +95,8 @@ class AuthStore {
 
 decorate(AuthStore, {
   user: observable,
+  userData: observable,
+  is_vender: observable,
 });
 
 const authStore = new AuthStore();
