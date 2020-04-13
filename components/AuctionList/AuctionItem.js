@@ -9,6 +9,8 @@ import ItemAddButton from "../Buttons/ItemAddButton";
 class AuctionItem extends Component {
   state = {
     auctionStart: true,
+    auctionID: this.props.item.id,
+    venderID: this.props.item.user,
   };
 
   startAuction = () => {
@@ -48,7 +50,10 @@ class AuctionItem extends Component {
             />
           </View>
 
-          <ItemAddButton />
+          <ItemAddButton
+            auctionID={this.state.auctionID}
+            venderID={this.state.venderID}
+          />
         </View>
       </TouchableOpacity>
     );

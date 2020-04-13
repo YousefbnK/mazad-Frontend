@@ -6,6 +6,7 @@ import { instance } from "./instance";
 class AuthStore {
   user = null;
   is_vender = null;
+  userID = null;
 
   setUser = async (token) => {
     if (token) {
@@ -18,9 +19,12 @@ class AuthStore {
     } else {
       await AsyncStorage.removeItem("myToken");
       await AsyncStorage.removeItem("is_vender");
+      await AsyncStorage.removeItem("userID");
+
       delete instance.defaults.headers.common.Authorization;
       this.user = null;
       this.is_vender = null;
+      this.userID = null;
     }
   };
 
@@ -29,8 +33,11 @@ class AuthStore {
       const res = await instance.post("login/", userData);
       const user = res.data;
       console.log("User logged in", user);
+
       this.is_vender = res.data.is_vender;
       await AsyncStorage.setItem("is_vender", JSON.stringify(this.is_vender));
+      this.userID = res.data.user_id;
+      await AsyncStorage.setItem("userID", JSON.stringify(this.userID));
       await this.setUser(user.access);
       navigation.goBack();
     } catch (err) {
@@ -46,6 +53,7 @@ class AuthStore {
       console.log("User registered", data);
       await this.setUser(data.access);
       navigation.goBack();
+      this.login(userData, navigation);
     } catch (error) {
       console.error(error);
     }
@@ -59,7 +67,9 @@ class AuthStore {
   checkForToken = async () => {
     const token = await AsyncStorage.getItem("myToken");
     const is_vender = JSON.parse(await AsyncStorage.getItem("is_vender"));
-    if (token && is_vender) {
+    const userID = JSON.parse(await AsyncStorage.getItem("userID"));
+
+    if (token && is_vender && userID) {
       const currentTime = Date.now() / 1000;
       // Decode token and get user info
       const user = jwt_decode(token);
@@ -68,6 +78,8 @@ class AuthStore {
         // Set auth token header
         await this.setUser(token);
         this.is_vender = is_vender;
+        this.userID = userID;
+        console.log(this.userID);
       } else {
         this.setUser();
       }
