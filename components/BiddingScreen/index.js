@@ -33,10 +33,6 @@ class BiddingScreen extends Component {
 
   setTimeout = () => this.setState({ shake: !this.state.shake });
 
-  start = () => {
-    this.refs(this.vb.start());
-  };
-
   render() {
     this.socket.on("Bid", (bid) => {
       this.setState({ currentBid: bid });
@@ -47,7 +43,7 @@ class BiddingScreen extends Component {
         <NodeCameraView
           style={styles.nodeCameraView}
           ref={(vb) => {
-            this.vb = vb;
+            this.vb = vb.start();
           }}
           outputUrl={
             "rtmp://live.mux.com/app/1c26beba-471e-42a2-132f-e33b53dd4978"
@@ -63,9 +59,6 @@ class BiddingScreen extends Component {
           }}
           autopreview={true}
         />
-        <View style={{ margin: 70 }}>
-          <Button onPress={this.start} title="Publish" color="#841584" />
-        </View>
         <View style={styles.info}>
           {this.state.currentBid < 1 && (
             <Text style={styles.initialPrice}>
@@ -108,6 +101,7 @@ class BiddingScreen extends Component {
 BiddingScreen.navigationOptions = {
   headerTransparent: "true",
   swipeEnabled: false,
+  gesturesEnabled: false,
   headerLeft: null,
 };
 
