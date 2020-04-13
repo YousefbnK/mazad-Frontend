@@ -7,6 +7,7 @@ import BiddingScreen from "../components/BiddingScreen";
 import Login from "../components/Authentication/Login";
 import Register from "../components/Authentication/Register";
 import BiddingScreenTest from "../components/BiddingScreen/BiddingScreenTest";
+import Profile from "../components/Profile";
 
 const StackNav = createStackNavigator(
   {
@@ -16,12 +17,10 @@ const StackNav = createStackNavigator(
     // Test: BiddingScreenTest,
     Login: Login,
     Register: Register,
+    Profile: Profile,
   },
   {
     initialRouteName: "HomeScreen",
-    defaultNavigationOptions: {
-      gesturesEnabled: false,
-    },
   }
 );
 
