@@ -5,7 +5,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#DCDCDC"
+    backgroundColor: "#DCDCDC",
+  },
+  title: {
+    color: "black",
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 150,
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
@@ -16,19 +23,19 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 20,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   inputs: {
     height: 45,
     marginLeft: 16,
     borderBottomColor: "#FFFFFF",
-    flex: 1
+    flex: 1,
   },
   inputIcon: {
     width: 30,
     height: 30,
     marginLeft: 15,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   buttonContainer: {
     height: 45,
@@ -37,7 +44,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
     width: 250,
-    borderRadius: 30
+    borderRadius: 30,
   },
   textByRegister: {
     color: "black",
@@ -47,14 +54,14 @@ const styles = StyleSheet.create({
     margin: 20,
     // textShadowColor: "rgba(0, 0, 0, 0.75)",
     textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10
+    textShadowRadius: 10,
   },
   loginButton: {
-    backgroundColor: "#00b5ec"
+    backgroundColor: "#00b5ec",
   },
   loginText: {
-    color: "white"
-  }
+    color: "white",
+  },
 });
 
 export default styles;
