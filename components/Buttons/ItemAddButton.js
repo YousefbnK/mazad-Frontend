@@ -22,7 +22,8 @@ class ItemAddButton extends Component {
   };
 
   render() {
-    if (authStore.is_vender) {
+    //  if for permissions (is_vender & is_vender owner)
+    if (authStore.is_vender && this.props.venderID === authStore.userID) {
       return (
         <View style={styles.addItemsView}>
           <ItemAddModal
@@ -31,7 +32,11 @@ class ItemAddButton extends Component {
             auctionID={this.props.auctionID}
           />
           <Button transparent onPress={this.openModal}>
-            <Icon style={{ color: "grey" }} name="plus-square" type="Feather" />
+            <Icon
+              style={{ color: "#1CC625" }}
+              name="plus-square"
+              type="Feather"
+            />
             <Text style={styles.addItemsText}>Add Items</Text>
           </Button>
         </View>

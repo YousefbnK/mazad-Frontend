@@ -10,6 +10,7 @@ class AuctionItem extends Component {
   state = {
     auctionStart: true,
     auctionID: this.props.item.id,
+    venderID: this.props.item.vender,
   };
 
   startAuction = () => {
@@ -49,7 +50,10 @@ class AuctionItem extends Component {
             />
           </View>
 
-          <ItemAddButton auctionID={this.state.auctionID} />
+          <ItemAddButton
+            auctionID={this.state.auctionID}
+            venderID={this.state.venderID}
+          />
         </View>
       </TouchableOpacity>
     );

@@ -33,6 +33,7 @@ class ItemAddModal extends Component {
     // ImagePicker.launchImageLibrary(options, (response) => {
     //   this.state.image = response;
     // });
+    //  this is not working have to link it to nativ  => react-native link react-native-image-picker
   };
 
   submitAuction = () => {
