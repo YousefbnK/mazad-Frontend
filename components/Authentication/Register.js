@@ -3,7 +3,7 @@ import React, { Component } from "react";
 //Styles
 import styles from "./styles";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
-import { Container, CheckBox, Body, ListItem } from "native-base";
+import { CheckBox, ListItem } from "native-base";
 
 //Stores
 import authStore from "../../stores/authStore";
@@ -27,6 +27,7 @@ class Register extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.title}>MAZAD APP</Text>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.inputs}
@@ -70,13 +71,16 @@ class Register extends Component {
         </View>
 
         <View>
-          <ListItem>
-            <CheckBox
-              checked={this.state.vender}
-              onPress={this.handleCheckBox}
-            />
-
-            <Text>Register as a vender</Text>
+          <ListItem style={{ margin: 20 }}>
+            <TouchableOpacity onPress={this.handleCheckBox}>
+              <CheckBox
+                checked={this.state.vender}
+                style={{ position: "absolute" }}
+              />
+              <Text style={{ marginLeft: 30, marginTop: 2 }}>
+                Register as a vender
+              </Text>
+            </TouchableOpacity>
           </ListItem>
         </View>
 
@@ -97,5 +101,9 @@ class Register extends Component {
     );
   }
 }
+
+Register.navigationOptions = {
+  headerTransparent: "true",
+};
 
 export default Register;

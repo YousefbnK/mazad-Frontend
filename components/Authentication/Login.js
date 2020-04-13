@@ -8,7 +8,7 @@ import authStore from "../../stores/authStore";
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
   };
 
   handlePress = () => this.props.navigation.navigate("Register");
@@ -18,11 +18,12 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.title}>MAZAD APP</Text>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.inputs}
             placeholder="username"
-            onChangeText={username => this.setState({ username })}
+            onChangeText={(username) => this.setState({ username })}
           />
         </View>
 
@@ -31,7 +32,7 @@ class Login extends Component {
             style={styles.inputs}
             placeholder="Password"
             secureTextEntry={true}
-            onChangeText={password => this.setState({ password })}
+            onChangeText={(password) => this.setState({ password })}
           />
         </View>
 
@@ -56,5 +57,9 @@ class Login extends Component {
     );
   }
 }
+
+Login.navigationOptions = {
+  headerTransparent: "true",
+};
 
 export default Login;
