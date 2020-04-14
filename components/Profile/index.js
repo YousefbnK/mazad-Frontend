@@ -11,6 +11,7 @@ import BaseIcon from "./BaseIcon";
 import Chevron from "./Chevron";
 import authStore from "../../stores/authStore";
 import LogoutButton from "../Buttons/LogoutButton";
+import { observer } from "mobx-react";
 
 class Profile extends Component {
   handleLogin = () => {
@@ -222,4 +223,4 @@ Profile.navigationOptions = {
   title: "Profile",
 };
 
-export default Profile;
+export default observer(Profile);

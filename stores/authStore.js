@@ -45,7 +45,7 @@ class AuthStore {
       await AsyncStorage.setItem("is_vender", JSON.stringify(this.is_vender));
       await AsyncStorage.setItem("userID", JSON.stringify(this.userID));
       await this.setUser(user.access);
-      navigation.goBack();
+      navigation.navigate("Home");
     } catch (err) {
       console.log(err);
       console.log("something went wrong logging in");

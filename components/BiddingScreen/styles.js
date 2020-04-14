@@ -1,10 +1,13 @@
 import { StyleSheet, Dimensions } from "react-native";
 
+// screen sizing
+const { width, height } = Dimensions.get("window");
+// orientation must fixed
+const SCREEN_WIDTH = width < height ? width : height;
+
 const styles = StyleSheet.create({
   info: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 270,
+    flex: 1,
   },
   description: {
     textAlign: "center",
@@ -16,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: "Arial",
     fontWeight: "bold",
-    marginTop: 200,
+    marginTop: 10,
     marginLeft: 20,
     alignSelf: "flex-start",
   },
@@ -33,29 +36,41 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 450,
   },
+  buttonView: {
+    flex: 1,
+    marginEnd: 20,
+    marginLeft: 20,
+    position: "relative",
+    bottom: -100,
+  },
   textInput: {
     height: 50,
-    bottom: -120,
     alignSelf: "flex-start",
-    position: "absolute",
-    left: 40,
+    borderColor: "grey",
+    borderWidth: 2,
   },
   shake: {
     height: 50,
     width: 160,
-    bottom: -120,
-    borderColor: "grey",
-    borderWidth: 2,
     alignSelf: "flex-start",
-    position: "absolute",
-    left: 20,
   },
   nodeCameraView: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    width: width,
+    height: height - 300,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  liveStreamText: {
+    fontSize: 16,
+    fontFamily: "Arial",
+    color: "black",
+    fontStyle: "italic",
+  },
+  videoTextView: {
+    width: width,
+    height: height - 300,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

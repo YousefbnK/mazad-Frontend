@@ -1,13 +1,19 @@
-import { createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
 //Navs
 import StackNav from "./StackNav";
 import BottomTabNav from "./BottomTabNav";
-import HomeStack from "./HomeStack";
 
-const SwitchNav = createSwitchNavigator({
-  BottomTabNav: BottomTabNav,
-  StackNav: StackNav,
-});
+const SwitchNav = createStackNavigator(
+  {
+    BottomTabNav: BottomTabNav,
+    StackNav: StackNav,
+  },
+  {
+    defaultNavigationOptions: {
+      header: null,
+    },
+  }
+);
 
 export default SwitchNav;
