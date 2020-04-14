@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CountDown from "react-native-countdown-component";
 
 //Styles
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Button, Icon } from "react-native";
 import styles from "./styles";
 import ItemAddButton from "../Buttons/ItemAddButton";
 
