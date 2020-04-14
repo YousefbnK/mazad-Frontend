@@ -49,9 +49,10 @@ class HomeScreen extends Component {
         <ScrollView>
           {!this.state.timerFinish && (
             <Text style={styles.categoryTitle}>
-              The next Auction is starting in:
+              The next Auction is starting in :
             </Text>
           )}
+
           <CountDown
             style={{ marginTop: 30 }}
             digitStyle={{
