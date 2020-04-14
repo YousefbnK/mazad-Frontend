@@ -2,10 +2,11 @@ import { decorate, observable } from "mobx";
 import { AsyncStorage } from "react-native";
 import jwt_decode from "jwt-decode";
 import { instance } from "./instance";
+import HomeScreen from "../components/HomeScreen";
 
 class AuthStore {
   user = null;
-  userData = [];
+  userData = {};
   is_vender = null;
   userID = null;
 
@@ -21,10 +22,11 @@ class AuthStore {
       await AsyncStorage.removeItem("myToken");
       await AsyncStorage.removeItem("is_vender");
       await AsyncStorage.removeItem("userID");
+      await AsyncStorage.removeItem("userData");
 
       delete instance.defaults.headers.common.Authorization;
       this.user = null;
-      this.userData = [];
+      this.userData = {};
       this.is_vender = null;
       this.userID = null;
     }
@@ -35,16 +37,26 @@ class AuthStore {
       const res = await instance.post("login/", userData);
       const user = res.data;
       console.log("User logged in", user);
-      this.userData.push({
+      this.userData = {
         email: user.email,
         firstName: user.first_name,
         lastName: user.last_name,
-      });
+      };
+
+      console.log(" this.userData", this.userData);
       this.is_vender = res.data.is_vender;
       this.userID = res.data.user_id;
       await AsyncStorage.setItem("is_vender", JSON.stringify(this.is_vender));
       await AsyncStorage.setItem("userID", JSON.stringify(this.userID));
+      await AsyncStorage.setItem("userData", JSON.stringify(this.userData));
       await this.setUser(user.access);
+
+
+      // goback is not going to home screen
+      // navigation.goBack();
+      //I know so I changed it to navigate to "Home"
+
+
       navigation.navigate("Home");
     } catch (err) {
       console.log(err);
@@ -74,8 +86,9 @@ class AuthStore {
     const token = await AsyncStorage.getItem("myToken");
     const is_vender = JSON.parse(await AsyncStorage.getItem("is_vender"));
     const userID = JSON.parse(await AsyncStorage.getItem("userID"));
+    const userData = JSON.parse(await AsyncStorage.getItem("userData"));
 
-    if (token && is_vender && userID) {
+    if (token && is_vender && userID && userData) {
       const currentTime = Date.now() / 1000;
       // Decode token and get user info
       const user = jwt_decode(token);
@@ -97,6 +110,7 @@ decorate(AuthStore, {
   user: observable,
   userData: observable,
   is_vender: observable,
+  userID: observable,
 });
 
 const authStore = new AuthStore();
