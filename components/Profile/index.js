@@ -29,7 +29,7 @@ class Profile extends Component {
             </View>
             <View>
               <Text style={{ fontSize: 16 }}>
-                {`${authStore.userData[0].firstName} ${authStore.userData[0].lastName}`}
+                {`${authStore.userData.firstName} ${authStore.userData.lastName}`}
               </Text>
               <Text
                 style={{
@@ -37,7 +37,7 @@ class Profile extends Component {
                   fontSize: 16,
                 }}
               >
-                {authStore.userData[0].email}
+                {authStore.userData.email}
               </Text>
             </View>
           </View>
