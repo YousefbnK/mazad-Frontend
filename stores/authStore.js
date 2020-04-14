@@ -51,8 +51,11 @@ class AuthStore {
       await AsyncStorage.setItem("userData", JSON.stringify(this.userData));
       await this.setUser(user.access);
 
+
       // goback is not going to home screen
       // navigation.goBack();
+      //I know so I changed it to navigate to "Home"
+
 
       navigation.navigate("Home");
     } catch (err) {

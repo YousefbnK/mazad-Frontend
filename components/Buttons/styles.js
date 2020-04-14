@@ -10,9 +10,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#2cd18a",
+    alignSelf: "flex-end",
     position: "absolute",
-    bottom: -120,
-    left: 20,
+    bottom: 0,
+    margin: 3,
   },
   containerAnon: {
     height: 50,
@@ -24,9 +25,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "grey",
+    alignSelf: "flex-end",
     position: "absolute",
-    bottom: -120,
-    left: 20,
+    bottom: 0,
+    margin: 3,
   },
   text: {
     fontSize: 20,
@@ -48,13 +50,10 @@ const styles = StyleSheet.create({
     marginLeft: -20,
   },
   logout: {
-    justifyContent: "center",
-    backgroundColor: "grey",
-    borderRadius: 20,
-    width: 150,
-    height: 40,
-    margin: 30,
-    alignSelf: "center",
+    color: "black",
+    fontSize: 20,
+    textAlign: "center",
+    margin: 20,
   },
 });
 

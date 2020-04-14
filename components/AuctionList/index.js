@@ -21,7 +21,7 @@ class AuctionList extends Component {
         <AuctionItem
           item={auction}
           navigation={this.props.navigation}
-          key={auction.title}
+          key={auction.id}
         />
       ));
       return (

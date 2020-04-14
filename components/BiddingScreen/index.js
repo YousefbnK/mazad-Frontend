@@ -2,25 +2,32 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import io from "socket.io-client";
 import NumericInput from "react-native-numeric-input";
-// import { NodeCameraView } from "react-native-nodemediaclient";
 
 //Styles
 import styles from "./styles";
-import { Text, View, Image, ScrollView, TextInput, Button } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import { Shake } from "react-native-motion";
 
 //Stores
 import auctionStore from "../../stores/auctionStore";
+
+//Buttons
 import BidButton from "../Buttons/BidButton";
+
+//Components
+import NodeCamera from "../Stream/NodeCameraView";
+import VideoView from "../Stream/VideoView";
+import authStore from "../../stores/authStore";
 
 class BiddingScreen extends Component {
   state = {
     bid: 0,
     currentBid: 0,
     shake: true,
+    auctionStart: false,
   };
 
-  socket = io.connect("http://127.0.0.1:8001");
+  socket = io.connect("http://178.128.207.229:8000");
 
   componentDidMount() {
     this.socket;
@@ -40,51 +47,45 @@ class BiddingScreen extends Component {
 
     return (
       <ScrollView>
-        {/* <NodeCameraView
-          style={styles.nodeCameraView}
-          ref={(vb) => {
-            this.vb = vb.start();
-          }}
-          outputUrl={
-            "rtmp://live.mux.com/app/1c26beba-471e-42a2-132f-e33b53dd4978"
-          }
-          camera={{ cameraId: 1, cameraFrontMirror: true }}
-          audio={{ bitrate: 32000, profile: 1, samplerate: 44100 }}
-          video={{
-            preset: 12,
-            bitrate: 400000,
-            profile: 1,
-            fps: 15,
-            videoFrontMirror: false,
-          }}
-          autopreview={true}
-        /> */}
+        {this.state.auctionStart ? (
+          <View style={styles.nodeCameraView}>
+            {authStore.is_vender ? <NodeCamera /> : <VideoView />}
+          </View>
+        ) : (
+          <View style={styles.videoTextView}>
+            <Text style={styles.liveStreamText}>
+              Live Stream is Unavailable
+            </Text>
+          </View>
+        )}
+
         <View style={styles.info}>
-          {this.state.currentBid < 1 && (
+          {this.state.currentBid < 1 ? (
             <Text style={styles.initialPrice}>
               Starting bid: {auctionStore.auctionItem[0].startBid} KD
             </Text>
+          ) : (
+            <Text style={styles.currentBid}>
+              Current bid: {this.state.currentBid} KD
+            </Text>
           )}
-          <Text style={styles.currentBid}>
-            Current bid: {this.state.currentBid} KD
-          </Text>
-          <View style={styles.textInput}>
-            <Shake value={this.state.shake} type="timing">
-              <NumericInput
-                type={"up-down"}
-                style={{ borderWidth: 2 }}
-                minValue={auctionStore.auctionItem[0].startBid}
-                initValue={auctionStore.auctionItem[0].startBid}
-                rounded={true}
-                reachMinIncIconStyle={{ marginTop: 15 }}
-                reachMinDecIconStyle={{ color: "white" }}
-                step={auctionStore.auctionItem[0].startBid / 10}
-                onChange={(bid) => {
-                  this.setState({ bid });
-                }}
-              />
-            </Shake>
-          </View>
+        </View>
+        <View style={styles.buttonView}>
+          <Shake value={this.state.shake} type="timing">
+            <NumericInput
+              type={"up-down"}
+              style={{ borderWidth: 2 }}
+              minValue={auctionStore.auctionItem[0].startBid}
+              initValue={auctionStore.auctionItem[0].startBid}
+              rounded={true}
+              reachMinIncIconStyle={{ marginTop: 15 }}
+              reachMinDecIconStyle={{ color: "white" }}
+              step={auctionStore.auctionItem[0].startBid / 10}
+              onChange={(bid) => {
+                this.setState({ bid });
+              }}
+            />
+          </Shake>
           <BidButton
             bid={this.state.bid}
             submitBid={this.submitCurrentBid}
