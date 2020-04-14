@@ -22,8 +22,6 @@ class ItemAddButton extends Component {
   };
 
   render() {
-    console.log(this.props.venderID, authStore.userID);
-
     //  if for permissions (is_vender & is_vender owner)
     if (authStore.is_vender && this.props.venderID === authStore.userID) {
       return (

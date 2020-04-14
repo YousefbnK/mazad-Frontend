@@ -12,8 +12,9 @@ import auctionStore from "../../stores/auctionStore";
 import CategoryItem from "./CategoryItem";
 
 const CategoriesList = ({ navigation }) => {
+  console.log("categories list", auctionStore.categories);
   if (auctionStore.loadingCat) {
-    return <Text>Loading</Text>;
+    return <Spinner />;
   } else {
     return (
       <View style={styles.container}>
@@ -22,7 +23,7 @@ const CategoriesList = ({ navigation }) => {
           numColumns={2}
           data={auctionStore.categories}
           keyExtractor={(items, index) => index.toString()}
-          renderItem={item => (
+          renderItem={(item) => (
             <CategoryItem item={item} navigation={navigation} />
           )}
         />

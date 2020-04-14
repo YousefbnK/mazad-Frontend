@@ -13,17 +13,11 @@ import AuctionItem from "./AuctionItem";
 import AddAuctionButton from "../Buttons/AddAuctionButton";
 
 class AuctionList extends Component {
-  state = {
-    catName: this.props.navigation.getParam("catId"),
-  };
-  filterAauction = auctionStore.auctions;
   render() {
-    console.log("CATID", this.props.navigation.getParam("catId"));
-    console.log("Auctions", auctionStore.auctions);
     if (auctionStore.loadingAuc) {
       return <Spinner />;
     } else {
-      const auctions = auctionStore.auctions.map((auction) => (
+      const auctions = auctionStore.filterAuctionsList.map((auction) => (
         <AuctionItem
           item={auction}
           navigation={this.props.navigation}
@@ -40,7 +34,7 @@ class AuctionList extends Component {
 }
 
 AuctionList.navigationOptions = {
-  title: "Auctions",
+  title: auctionStore.catObj ? auctionStore.catObj.name : "AuctionListl",
   headerRight: <AddAuctionButton />,
 };
 

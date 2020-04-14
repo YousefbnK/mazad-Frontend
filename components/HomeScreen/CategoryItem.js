@@ -1,12 +1,16 @@
 import React from "react";
 
+//Stores
+import auctionStore from "../../stores/auctionStore";
+
 //Style
 import styles from "./styles";
 import { Text, Image, View, TouchableOpacity } from "react-native";
 
 const CategoryItem = (props) => {
   const navigate = () => {
-    props.navigation.navigate("AuctionList", { catId: props.item.item.name });
+    auctionStore.setCatID(props.item.item.id);
+    props.navigation.navigate("AuctionList", { catId: props.item.item.id });
   };
 
   return (
