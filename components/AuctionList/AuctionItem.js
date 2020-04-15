@@ -42,7 +42,7 @@ class AuctionItem extends Component {
           <View style={styles.countDownView}>
             <CountDown
               style={styles.countDownTimer}
-              until={5}
+              until={this.startTime()}
               onFinish={() => this.setState({ auctionStart: false })}
               size={15}
               digitStyle={{ backgroundColor: "#FFF" }}
