@@ -4,25 +4,25 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Components
 import HomeStack from "./HomeStack";
-import AuctionNav from "./AuctionNav";
 import ProfileStack from "./ProfileStack";
+import LiveAuctionStack from "./LiveAuctionStack";
 
 const BottomTabNav = createBottomTabNavigator(
   {
     Home: HomeStack,
-    Auctions: AuctionNav,
+    "Live Auctions": LiveAuctionStack,
     Profile: ProfileStack,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => {
+      tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
         let IconComponent = Ionicons;
         let iconName;
         if (routeName === "Home") {
           iconName = "ios-home";
-        } else if (routeName === "Auctions") {
-          iconName = focused ? "ios-list-box" : "ios-list";
+        } else if (routeName === "Live Auctions") {
+          iconName = "ios-cellular";
         } else if (routeName === "Profile") {
           iconName = "ios-contact";
         }
