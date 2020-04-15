@@ -2,11 +2,11 @@ import { createStackNavigator } from "react-navigation-stack";
 
 // Components
 
-import AuctionList from "../components/AuctionList";
+import LiveAuctionList from "../components/AuctionList/LiveAuctionList";
 import BiddingScreen from "../components/BiddingScreen";
 
 const AuctionNav = createStackNavigator({
-  AuctionList: AuctionList,
+  AuctionList: LiveAuctionList,
   BiddingScreen: BiddingScreen,
 });
 

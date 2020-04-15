@@ -66,6 +66,13 @@ class AuctionStore {
       console.error(err);
     }
   };
+  submiAuctionCharg = async (Charg) => {
+    try {
+      await instance.post("", Charg);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   submitBids = async (bid) => {
     try {

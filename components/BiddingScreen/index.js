@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import NumericInput from "react-native-numeric-input";
-import Video from "react-native-video";
+import io from "socket.io-client";
+import { Badge } from "native-base";
+
 
 //Styles
 import styles from "./styles";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, TextInput, TouchableHighlight } from "react-native";
 import { Shake } from "react-native-motion";
 
 //Stores
@@ -38,10 +39,16 @@ class BiddingScreen extends Component {
 
   setTimeout = () => this.setState({ shake: !this.state.shake });
 
+  handleadd = (value) => {
+    let newValue = this.state.userbid + value;
+    this.setState({ userbid: newValue });
+    console.log("bid", this.state.userbid);
+  };
+
   render() {
     socketStore.fetchCurrentBid();
     return (
-      <ScrollView>
+      <View>
         {this.state.auctionStart ? (
           <View style={styles.nodeCameraView}>
             {authStore.is_vender ? <NodeCamera /> : <VideoView />}
@@ -64,40 +71,79 @@ class BiddingScreen extends Component {
             </Text>
           )}
         </View>
+
         <View style={styles.buttonView}>
           <Shake value={this.state.shake} type="timing">
-            <NumericInput
-              type={"up-down"}
-              style={{ borderWidth: 2 }}
-              minValue={auctionStore.auctionItem[0].startBid}
-              initValue={this.state.currentBid}
-              rounded={true}
-              reachMinIncIconStyle={{ marginTop: 15 }}
-              reachMinDecIconStyle={{ color: "white" }}
-              step={auctionStore.auctionItem[0].startBid / 10}
-              onChange={(bid) => {
+            <TextInput
+              style={styles.container}
+              keyboardType="numeric"
+              textAlign="center"
+              defaultValue={`${this.state.userbid}`}
+              onChangeText={(bid) => {
                 this.setState({ bid });
               }}
             />
           </Shake>
+
           <BidButton
+            onPress
             bid={this.state.bid}
             submitBid={this.submitCurrentBid}
             currentBid={this.state.currentBid}
             shake={this.setTimeout}
             navigation={this.props.navigation}
           />
+
+          <View style={styles.badge}>
+            <TouchableHighlight onPress={() => this.handleadd(5)}>
+              <View style={{ padding: 4 }}>
+                <Badge
+                  style={{
+                    backgroundColor: "#2cd18a",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text style={{ color: "white" }}>+5 kd</Text>
+                </Badge>
+              </View>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => this.handleadd(10)}>
+              <View style={{ padding: 4 }}>
+                <Badge
+                  style={{
+                    backgroundColor: "#28bd7d",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text style={{ color: "white" }}>+10 kd</Text>
+                </Badge>
+              </View>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => this.handleadd(50)}>
+              <View style={{ padding: 4 }}>
+                <Badge
+                  style={{
+                    backgroundColor: "#24ad73",
+
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text style={{ color: "white" }}>+50 kd</Text>
+                </Badge>
+              </View>
+            </TouchableHighlight>
+          </View>
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
 
 BiddingScreen.navigationOptions = {
   headerTransparent: "true",
-  swipeEnabled: false,
-  gesturesEnabled: false,
-  headerLeft: null,
+  // swipeEnabled: false,
+  // gesturesEnabled: false,
+  // headerLeft: null,
 };
 
 export default observer(BiddingScreen);

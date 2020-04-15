@@ -38,7 +38,7 @@ class ItemAddModal extends Component {
 
   submitAuction = () => {
     const toAddItems = { items: this.state.items };
-    console.log("toAddItems", toAddItems);
+
     auctionStore.createItems(toAddItems);
     this.props.closeModal();
   };
