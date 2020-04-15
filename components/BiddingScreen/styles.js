@@ -29,12 +29,6 @@ const styles = StyleSheet.create({
     marginTop: height / 6,
     alignContent: "center",
   },
-  textInput: {
-    height: 50,
-    alignSelf: "flex-start",
-    borderColor: "grey",
-    borderWidth: 2,
-  },
   shake: {
     height: 50,
     width: 160,
@@ -57,6 +51,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textInput: {
+    flexDirection: "row",
     height: 50,
     width: 175,
     borderRadius: 20,

@@ -18,15 +18,25 @@ class Profile extends Component {
     this.props.navigation.navigate("Login");
   };
 
+  handleRegister = () => {
+    this.props.navigation.navigate("Register");
+  };
+
   render() {
-    console.log("AUTH", authStore.user);
-    console.log("ID", authStore.userData);
     if (authStore.user) {
       return (
         <ScrollView style={styles.scroll}>
           <View style={styles.userRow}>
             <View style={styles.userImage}>
-              <Avatar rounded size="large" title="MZ" />
+              <Avatar
+                rounded
+                size="large"
+                title={`${authStore.userData.firstName
+                  .charAt(0)
+                  .toUpperCase()}${authStore.userData.lastName
+                  .charAt(0)
+                  .toUpperCase()}`}
+              />
             </View>
             <View>
               <Text style={{ fontSize: 16 }}>

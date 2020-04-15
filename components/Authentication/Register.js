@@ -104,6 +104,7 @@ class Register extends Component {
 
 Register.navigationOptions = {
   headerTransparent: "true",
+  headerLeft: null,
 };
 
 export default Register;

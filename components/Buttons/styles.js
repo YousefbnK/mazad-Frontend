@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   container: {
     height: 50,
     width: 160,
+    flexDirection: "row",
     borderRadius: 20,
     borderColor: "#2cd18a",
     borderWidth: 1,
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
   containerAnon: {
     height: 50,
     width: 160,
+    flexDirection: "row",
     borderRadius: 20,
     borderColor: "grey",
     opacity: 0.7,

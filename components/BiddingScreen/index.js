@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { Badge } from "native-base";
+import io from "socket.io-client";
 
 //Styles
 import styles from "./styles";
-import { Text, View, TextInput, TouchableHighlight } from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { Shake } from "react-native-motion";
 
 //Stores
@@ -27,8 +28,10 @@ class BiddingScreen extends Component {
     auctionStart: false,
   };
 
+  socket = io.connect("http://178.128.207.229:8000");
+
   componentDidMount() {
-    socketStore.socket;
+    this.socket;
   }
 
   submitCurrentBid = (bid) => {
@@ -43,11 +46,9 @@ class BiddingScreen extends Component {
   };
 
   render() {
-    fetchCurrentBid = () => {
-      this.socket.on("Bid", (bid) => {
-        this.currentBid = bid;
-      });
-    };
+    this.socket.on("Bid", (bid) => {
+      this.setState({ currentBid: bid });
+    });
     return (
       <View>
         {this.state.auctionStart ? (
@@ -96,7 +97,7 @@ class BiddingScreen extends Component {
           />
 
           <View style={styles.badge}>
-            <TouchableHighlight onPress={() => this.handleadd(5)}>
+            <TouchableOpacity onPress={() => this.handleadd(5)}>
               <View style={{ padding: 4 }}>
                 <Badge
                   style={{
@@ -107,8 +108,8 @@ class BiddingScreen extends Component {
                   <Text style={{ color: "white" }}>+5 kd</Text>
                 </Badge>
               </View>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => this.handleadd(10)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.handleadd(10)}>
               <View style={{ padding: 4 }}>
                 <Badge
                   style={{
@@ -119,8 +120,8 @@ class BiddingScreen extends Component {
                   <Text style={{ color: "white" }}>+10 kd</Text>
                 </Badge>
               </View>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => this.handleadd(50)}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.handleadd(50)}>
               <View style={{ padding: 4 }}>
                 <Badge
                   style={{
@@ -132,7 +133,7 @@ class BiddingScreen extends Component {
                   <Text style={{ color: "white" }}>+50 kd</Text>
                 </Badge>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

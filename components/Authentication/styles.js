@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 150,
+    marginBottom: 120,
+    marginTop: 120,
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
