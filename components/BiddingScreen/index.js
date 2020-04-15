@@ -22,6 +22,7 @@ import socketStore from "../../stores/socketStore";
 class BiddingScreen extends Component {
   state = {
     bid: 0,
+    userbid: 100,
     currentBid: socketStore.currentBid,
     shake: true,
     auctionStart: false,
@@ -44,7 +45,9 @@ class BiddingScreen extends Component {
   };
 
   render() {
+
     socketStore.fetchCurrentBid();
+
     return (
       <View>
         {this.state.auctionStart ? (
