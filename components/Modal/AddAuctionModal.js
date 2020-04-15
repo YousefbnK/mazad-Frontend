@@ -43,7 +43,6 @@ class AddAuctionModal extends Component {
       description: this.state.description,
       start_date: this.state.start_date,
       category: auctionStore.catObj.id,
-      //  ----- change catagory to take the catagory of the auction list  -----
     };
     auctionStore.createAuctions(auctionObj);
     this.props.closeModal();
