@@ -17,7 +17,9 @@ class LogoutButton extends Component {
     return (
       <TouchableOpacity onPress={this.handlelogout}>
         <View style={styles.logout}>
-          <Text style={{ fontSize: 16, textAlign: "center" }}>LOG OUT</Text>
+          <Text style={{ fontSize: 16, textAlign: "center", margin: 20 }}>
+            LOG OUT
+          </Text>
         </View>
       </TouchableOpacity>
     );
