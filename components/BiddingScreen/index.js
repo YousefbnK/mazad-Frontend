@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import io from "socket.io-client";
 import { Badge } from "native-base";
-
 
 //Styles
 import styles from "./styles";
@@ -40,9 +38,9 @@ class BiddingScreen extends Component {
   setTimeout = () => this.setState({ shake: !this.state.shake });
 
   handleadd = (value) => {
-    let newValue = this.state.userbid + value;
-    this.setState({ userbid: newValue });
-    console.log("bid", this.state.userbid);
+    let newValue = this.state.bid + value;
+    this.setState({ bid: newValue });
+    console.log("bid", this.state.bid);
   };
 
   render() {
@@ -60,13 +58,13 @@ class BiddingScreen extends Component {
             </Text>
           </View>
         )}
-        <View style={styles.info}>
+        <View>
           {this.state.currentBid < 1 ? (
-            <Text style={styles.initialPrice}>
+            <Text style={styles.bidText}>
               Starting bid: {auctionStore.auctionItem[0].startBid} KD
             </Text>
           ) : (
-            <Text style={styles.currentBid}>
+            <Text style={styles.bidText}>
               Current bid: {this.state.currentBid} KD
             </Text>
           )}
@@ -75,10 +73,10 @@ class BiddingScreen extends Component {
         <View style={styles.buttonView}>
           <Shake value={this.state.shake} type="timing">
             <TextInput
-              style={styles.container}
+              style={styles.textInput}
               keyboardType="numeric"
               textAlign="center"
-              defaultValue={`${this.state.userbid}`}
+              defaultValue={`${this.state.bid}`}
               onChangeText={(bid) => {
                 this.setState({ bid });
               }}
