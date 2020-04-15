@@ -8,7 +8,12 @@ const NodeCamera = () => {
     <NodeCameraView
       style={styles.backgroundVideo}
       ref={(vb) => {
-        this.vb = vb.start();
+        if (vb == null) {
+          console.log("hi");
+        } else {
+          console.log("VB", vb);
+          this.vb = vb.start();
+        }
       }}
       outputUrl={"rtmp://live.mux.com/app/69d88339-14d1-865e-75ed-e80f1aa11227"}
       camera={{ cameraId: 1, cameraFrontMirror: true }}

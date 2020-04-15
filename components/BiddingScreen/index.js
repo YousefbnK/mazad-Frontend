@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { Badge } from "native-base";
-import io from "socket.io-client";
 import Badges from "./Bages";
 
 //Styles
@@ -26,15 +25,12 @@ class BiddingScreen extends Component {
     bid: 0,
     currentBid: socketStore.currentBid,
     shake: true,
-    auctionStart: socketStore,
+    auctionStart: true,
   };
 
   componentDidMount() {
     socketStore.socket;
   }
-
-  submitStart = () => socketStore.submitStart("true");
-  submitStop = () => socketStore.submitStart("false");
 
   submitCurrentBid = (bid) => {
     socketStore.submitBid(bid);
@@ -51,12 +47,20 @@ class BiddingScreen extends Component {
     socketStore.socket.on("Bid", (bid) => {
       this.setState({ currentBid: bid });
     });
-
-    socketStore.socket.on("start", (start) => {
-      this.setState({ auctionStart: !this.state.auctionStart });
-    });
     return (
       <View>
+        {this.state.auctionStart ? (
+          <View style={styles.videoTextView}>
+            {authStore.is_vender ? <NodeCamera /> : <VideoView />}
+          </View>
+        ) : (
+          <View style={styles.videoTextView}>
+            <Text style={styles.liveStreamText}>
+              Live Stream is Unavailable
+            </Text>
+          </View>
+        )}
+        <View>
         <View style={styles.camra}>
           {this.state.auctionStart ? (
             <View>
@@ -81,7 +85,6 @@ class BiddingScreen extends Component {
             </View>
           )}
         </View>
-
         <View style={styles.textsection}>
           {this.state.currentBid < 1 ? (
             <Text style={styles.bidText}>
@@ -93,7 +96,6 @@ class BiddingScreen extends Component {
             </Text>
           )}
         </View>
-
         <View style={styles.biddingsection}>
           {/* <View style={styles.buttonView}>  was removed top*/}
 
