@@ -57,8 +57,6 @@ const styles = StyleSheet.create({
   nodeCameraView: {
     width: width,
     height: height - 300,
-    justifyContent: "center",
-    alignItems: "center",
   },
   liveStreamText: {
     fontSize: 16,
