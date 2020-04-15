@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import io from "socket.io-client";
 import { Badge } from "native-base";
 
 //Styles
@@ -15,44 +14,40 @@ import auctionStore from "../../stores/auctionStore";
 import BidButton from "../Buttons/BidButton";
 
 //Components
-import NodeCamera from "../Stream/NodeCameraView";
+import NodeCamera from "../Stream/NodeCamera";
 import VideoView from "../Stream/VideoView";
 import authStore from "../../stores/authStore";
+import socketStore from "../../stores/socketStore";
 
 class BiddingScreen extends Component {
   state = {
     bid: 0,
-    currentBid: 0,
     userbid: 100,
+    currentBid: socketStore.currentBid,
     shake: true,
     auctionStart: false,
   };
 
-  socket = io.connect("http://178.128.207.229:8000");
-
   componentDidMount() {
-    this.socket;
+    socketStore.socket;
   }
 
   submitCurrentBid = (bid) => {
-    this.socket.emit("Bid", bid);
-    this.setState({ bid: this.state.currentBid });
-    console.log("bid", this.state.userbid);
+    socketStore.submitBid(bid);
   };
 
   setTimeout = () => this.setState({ shake: !this.state.shake });
 
   handleadd = (value) => {
-    let newValue = this.state.userbid + value;
-    this.setState({ userbid: newValue });
-    console.log("bid", this.state.userbid);
+    let newValue = this.state.bid + value;
+    this.setState({ bid: newValue });
+    console.log("bid", this.state.bid);
   };
 
   render() {
-    this.socket.on("Bid", (bid) => {
-      this.setState({ currentBid: bid });
-    });
-    console.log("props", this.props);
+
+    socketStore.fetchCurrentBid();
+
     return (
       <View>
         {this.state.auctionStart ? (
@@ -66,14 +61,13 @@ class BiddingScreen extends Component {
             </Text>
           </View>
         )}
-
-        <View style={styles.info}>
+        <View>
           {this.state.currentBid < 1 ? (
-            <Text style={styles.initialPrice}>
+            <Text style={styles.bidText}>
               Starting bid: {auctionStore.auctionItem[0].startBid} KD
             </Text>
           ) : (
-            <Text style={styles.currentBid}>
+            <Text style={styles.bidText}>
               Current bid: {this.state.currentBid} KD
             </Text>
           )}
@@ -82,10 +76,10 @@ class BiddingScreen extends Component {
         <View style={styles.buttonView}>
           <Shake value={this.state.shake} type="timing">
             <TextInput
-              style={styles.container}
+              style={styles.textInput}
               keyboardType="numeric"
               textAlign="center"
-              defaultValue={`${this.state.userbid}`}
+              defaultValue={`${this.state.bid}`}
               onChangeText={(bid) => {
                 this.setState({ bid });
               }}
