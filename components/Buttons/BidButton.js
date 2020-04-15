@@ -19,7 +19,7 @@ const BidButton = (props) => {
         props.shake();
       }
     } else {
-      props.navigation.navigate("Login");
+      props.navigation.navigate("Profile");
     }
   };
   return (

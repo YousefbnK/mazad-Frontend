@@ -55,7 +55,7 @@ class AuthStore {
       // navigation.goBack();
       //I know so I changed it to navigate to "Home"
 
-      navigation.navigate("Home");
+      navigation.goBack();
     } catch (err) {
       console.log(err);
       console.log("something went wrong logging in");
@@ -68,7 +68,7 @@ class AuthStore {
       const data = res.data;
       console.log("User registered", data);
       await this.setUser(data.access);
-      navigation.navigate("Home");
+      navigation.navigate("Login");
       this.login(userData, navigation);
     } catch (error) {
       console.error(error);
