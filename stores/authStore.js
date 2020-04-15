@@ -51,11 +51,9 @@ class AuthStore {
       await AsyncStorage.setItem("userData", JSON.stringify(this.userData));
       await this.setUser(user.access);
 
-
       // goback is not going to home screen
       // navigation.goBack();
       //I know so I changed it to navigate to "Home"
-
 
       navigation.navigate("Home");
     } catch (err) {
@@ -88,7 +86,7 @@ class AuthStore {
     const userID = JSON.parse(await AsyncStorage.getItem("userID"));
     const userData = JSON.parse(await AsyncStorage.getItem("userData"));
 
-    if (token && is_vender && userID && userData) {
+    if (token) {
       const currentTime = Date.now() / 1000;
       // Decode token and get user info
       const user = jwt_decode(token);
@@ -98,6 +96,7 @@ class AuthStore {
         await this.setUser(token);
         this.is_vender = is_vender;
         this.userID = userID;
+        this.userData = userData;
         console.log(this.userID);
       } else {
         this.setUser();

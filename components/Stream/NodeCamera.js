@@ -1,11 +1,14 @@
 import React from "react";
 import { NodeCameraView } from "react-native-nodemediaclient";
 
+import styles from "./styles";
+
 const NodeCamera = () => {
   return (
     <NodeCameraView
+      style={styles.backgroundVideo}
       ref={(vb) => {
-        this.vb = vb.start();
+        this.vb = vb;
       }}
       outputUrl={"rtmp://live.mux.com/app/1c26beba-471e-42a2-132f-e33b53dd4978"}
       camera={{ cameraId: 1, cameraFrontMirror: true }}
