@@ -22,7 +22,7 @@ import socketStore from "../../stores/socketStore";
 class BiddingScreen extends Component {
   state = {
     bid: 0,
-    currentBid: socketStore.currentBid,
+    currentBid: 0,
     shake: true,
     auctionStart: false,
   };
@@ -40,11 +40,14 @@ class BiddingScreen extends Component {
   handleadd = (value) => {
     let newValue = this.state.bid + value;
     this.setState({ bid: newValue });
-    console.log("bid", this.state.bid);
   };
 
   render() {
-    socketStore.fetchCurrentBid();
+    fetchCurrentBid = () => {
+      this.socket.on("Bid", (bid) => {
+        this.currentBid = bid;
+      });
+    };
     return (
       <View>
         {this.state.auctionStart ? (
@@ -139,8 +142,8 @@ class BiddingScreen extends Component {
 
 BiddingScreen.navigationOptions = {
   headerTransparent: "true",
-  // swipeEnabled: false,
-  // gesturesEnabled: false,
+  swipeEnabled: false,
+  gesturesEnabled: false,
   // headerLeft: null,
 };
 

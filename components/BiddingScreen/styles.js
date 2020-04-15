@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
   buttonView: {
     marginEnd: 20,
     marginLeft: 20,
-    borderColor: "grey",
-    borderWidth: 5,
     position: "relative",
     marginTop: height / 6,
     alignContent: "center",

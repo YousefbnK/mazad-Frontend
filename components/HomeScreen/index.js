@@ -18,7 +18,6 @@ import auctionStore from "../../stores/auctionStore";
 
 //Components
 import CategoriesList from "./CategoriesList";
-import RegisterationButton from "../Buttons/RegisterationButton";
 
 class HomeScreen extends Component {
   state = {
@@ -27,7 +26,7 @@ class HomeScreen extends Component {
 
   handlePress = () => {
     if (this.state.timerFinish) {
-      alert("Tadaa");
+      this.props.navigation.navigate("AuctionListLive");
     } else {
       alert("more patience required");
     }
@@ -64,16 +63,13 @@ class HomeScreen extends Component {
             separatorStyle={{ color: "#3CB371" }}
             until={this.startTime()}
             onFinish={() => this.setState({ timerFinish: true })}
-            onPress={() => this.props.navigation.navigate("AuctionList")}
+            onPress={this.handlePress}
             size={30}
           />
 
           {this.state.timerFinish && (
             <TouchableOpacity onPress={this.handlePress}>
-              <Text style={styles.categoryTitle}>
-                {" "}
-                Take me to the Auction !
-              </Text>
+              <Text style={styles.categoryTitle}>Take me to the Auction !</Text>
             </TouchableOpacity>
           )}
 
