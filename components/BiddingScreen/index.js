@@ -23,16 +23,17 @@ import socketStore from "../../stores/socketStore";
 class BiddingScreen extends Component {
   state = {
     bid: 0,
-    currentBid: 0,
+    currentBid: socketStore.currentBid,
     shake: true,
-    auctionStart: false,
+    auctionStart: true,
   };
 
-  socket = io.connect("http://178.128.207.229:8000");
-
   componentDidMount() {
-    this.socket;
+    socketStore.socket;
   }
+
+  submitStart = () => this.setState({ auctionStart: true });
+  submitStop = () => this.setState({ auctionStart: false });
 
   submitCurrentBid = (bid) => {
     socketStore.submitBid(bid);
@@ -46,20 +47,28 @@ class BiddingScreen extends Component {
   };
 
   render() {
-    this.socket.on("Bid", (bid) => {
+    socketStore.socket.on("Bid", (bid) => {
       this.setState({ currentBid: bid });
     });
     return (
       <View>
         {this.state.auctionStart ? (
           <View style={styles.nodeCameraView}>
-            {authStore.is_vender ? <NodeCamera /> : <VideoView />}
+            <View style={styles.videoTextView}>
+              {authStore.is_vender ? <NodeCamera /> : <VideoView />}
+              <TouchableOpacity onPress={this.submitStop}>
+                <Text>Stop</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         ) : (
           <View style={styles.videoTextView}>
             <Text style={styles.liveStreamText}>
               Live Stream is Unavailable
             </Text>
+            <TouchableOpacity onPress={this.submitStart}>
+              <Text>START</Text>
+            </TouchableOpacity>
           </View>
         )}
         <View>

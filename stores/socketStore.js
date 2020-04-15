@@ -7,6 +7,7 @@ class SocketStore {
 
   submitBid = (bid) => {
     this.socket.emit("Bid", bid);
+    this.currentBid = bid;
   };
 
   fetchCurrentBid = () => {

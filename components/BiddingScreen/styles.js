@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textInput: {
-    flexDirection: "row",
     height: 50,
     width: 175,
     borderRadius: 20,

@@ -9,7 +9,7 @@ const VideoView = () => {
       style={styles.backgroundVideo}
       source={{
         uri:
-          "https://stream.mux.com/iM02cT9obBHSA5dCVbOXiIH3tiNFImlo2g4KwbrJ1KXU.m3u8",
+          "https://stream.mux.com/sol9OK802ufu4TWNIdZkVjRJQ02wmaunPAq5UPhMVGab4.m3u8",
       }}
     />
   );
