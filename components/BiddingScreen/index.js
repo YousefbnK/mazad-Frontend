@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { Badge } from "native-base";
 import io from "socket.io-client";
+import Badges from "./Bages";
 
 //Styles
 import styles from "./styles";
@@ -56,26 +57,32 @@ class BiddingScreen extends Component {
     });
     return (
       <View>
-        {this.state.auctionStart ? (
-          <View style={styles.nodeCameraView}>
-            <View style={styles.videoTextView}>
-              {authStore.is_vender ? <NodeCamera /> : <VideoView />}
-              <TouchableOpacity onPress={this.submitStop}>
-                <Text>Stop</Text>
+        <View style={styles.camra}>
+          {this.state.auctionStart ? (
+            <View>
+              {/* style={styles.nodeCameraView} war rem top */}
+              <View style={styles.videoTextView}>
+                {authStore.is_vender ? <NodeCamera /> : <VideoView />}
+                <TouchableOpacity onPress={this.submitStop}>
+                  <Text>Stop</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : (
+            <View>
+              {/* <View style={styles.videoTextView}>  was rm top*/}
+
+              <Text style={styles.liveStreamText}>
+                Live Stream is Unavailable
+              </Text>
+              <TouchableOpacity onPress={this.submitStart}>
+                <Text>START</Text>
               </TouchableOpacity>
             </View>
-          </View>
-        ) : (
-          <View style={styles.videoTextView}>
-            <Text style={styles.liveStreamText}>
-              Live Stream is Unavailable
-            </Text>
-            <TouchableOpacity onPress={this.submitStart}>
-              <Text>START</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        <View>
+          )}
+        </View>
+
+        <View style={styles.textsection}>
           {this.state.currentBid < 1 ? (
             <Text style={styles.bidText}>
               Starting bid: {auctionStore.auctionItem[0].startBid} KD
@@ -87,7 +94,9 @@ class BiddingScreen extends Component {
           )}
         </View>
 
-        <View style={styles.buttonView}>
+        <View style={styles.biddingsection}>
+          {/* <View style={styles.buttonView}>  was removed top*/}
+
           <Shake value={this.state.shake} type="timing">
             <TextInput
               style={styles.textInput}
@@ -108,47 +117,9 @@ class BiddingScreen extends Component {
             shake={this.setTimeout}
             navigation={this.props.navigation}
           />
-
-          <View style={styles.badge}>
-            <TouchableOpacity onPress={() => this.handleadd(5)}>
-              <View style={{ padding: 4 }}>
-                <Badge
-                  style={{
-                    backgroundColor: "#2cd18a",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Text style={{ color: "white" }}>+5 kd</Text>
-                </Badge>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handleadd(10)}>
-              <View style={{ padding: 4 }}>
-                <Badge
-                  style={{
-                    backgroundColor: "#28bd7d",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Text style={{ color: "white" }}>+10 kd</Text>
-                </Badge>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handleadd(50)}>
-              <View style={{ padding: 4 }}>
-                <Badge
-                  style={{
-                    backgroundColor: "#24ad73",
-
-                    justifyContent: "center",
-                  }}
-                >
-                  <Text style={{ color: "white" }}>+50 kd</Text>
-                </Badge>
-              </View>
-            </TouchableOpacity>
-          </View>
         </View>
+
+        <Badges handleadd={this.handleadd} />
       </View>
     );
   }
