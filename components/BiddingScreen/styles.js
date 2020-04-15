@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   bidText: {
-    flex: 1,
+    // flex: 1,
     position: "absolute",
     fontSize: 24,
     fontFamily: "Arial",
@@ -58,15 +58,33 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "flex-start",
-    position: "absolute",
+    // alignSelf: "flex-start",
+    // position: "absolute",
     bottom: 0,
     margin: 3,
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: "Arial",
   },
+
+  camra: {
+    height: "67%",
+    borderColor: "red",
+  },
+
+  textsection: {
+    height: "10%",
+    alignSelf: "flex-start",
+    borderColor: "black",
+  },
+
+  biddingsection: {
+    flexDirection: "row",
+    borderColor: "red",
+  },
+
   badge: {
+    borderColor: "black",
     flexDirection: "row",
     fontSize: 20,
     fontWeight: "bold",
