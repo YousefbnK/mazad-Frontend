@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import io from "socket.io-client";
 import NumericInput from "react-native-numeric-input";
+import Video from "react-native-video";
 
 //Styles
 import styles from "./styles";
@@ -15,36 +15,31 @@ import auctionStore from "../../stores/auctionStore";
 import BidButton from "../Buttons/BidButton";
 
 //Components
-import NodeCamera from "../Stream/NodeCameraView";
+import NodeCamera from "../Stream/NodeCamera";
 import VideoView from "../Stream/VideoView";
 import authStore from "../../stores/authStore";
+import socketStore from "../../stores/socketStore";
 
 class BiddingScreen extends Component {
   state = {
     bid: 0,
-    currentBid: 0,
+    currentBid: socketStore.currentBid,
     shake: true,
     auctionStart: false,
   };
 
-  socket = io.connect("http://178.128.207.229:8000");
-
   componentDidMount() {
-    this.socket;
+    socketStore.socket;
   }
 
   submitCurrentBid = (bid) => {
-    this.socket.emit("Bid", bid);
-    this.setState({ bid: this.state.currentBid });
+    socketStore.submitBid(bid);
   };
 
   setTimeout = () => this.setState({ shake: !this.state.shake });
 
   render() {
-    this.socket.on("Bid", (bid) => {
-      this.setState({ currentBid: bid });
-    });
-
+    socketStore.fetchCurrentBid();
     return (
       <ScrollView>
         {this.state.auctionStart ? (
@@ -58,7 +53,6 @@ class BiddingScreen extends Component {
             </Text>
           </View>
         )}
-
         <View style={styles.info}>
           {this.state.currentBid < 1 ? (
             <Text style={styles.initialPrice}>
@@ -76,7 +70,7 @@ class BiddingScreen extends Component {
               type={"up-down"}
               style={{ borderWidth: 2 }}
               minValue={auctionStore.auctionItem[0].startBid}
-              initValue={auctionStore.auctionItem[0].startBid}
+              initValue={this.state.currentBid}
               rounded={true}
               reachMinIncIconStyle={{ marginTop: 15 }}
               reachMinDecIconStyle={{ color: "white" }}
