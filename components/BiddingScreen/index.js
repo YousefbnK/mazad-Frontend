@@ -25,15 +25,15 @@ class BiddingScreen extends Component {
     bid: 0,
     currentBid: socketStore.currentBid,
     shake: true,
-    auctionStart: true,
+    auctionStart: socketStore,
   };
 
   componentDidMount() {
     socketStore.socket;
   }
 
-  submitStart = () => this.setState({ auctionStart: true });
-  submitStop = () => this.setState({ auctionStart: false });
+  submitStart = () => socketStore.submitStart("true");
+  submitStop = () => socketStore.submitStart("false");
 
   submitCurrentBid = (bid) => {
     socketStore.submitBid(bid);
@@ -49,6 +49,10 @@ class BiddingScreen extends Component {
   render() {
     socketStore.socket.on("Bid", (bid) => {
       this.setState({ currentBid: bid });
+    });
+
+    socketStore.socket.on("start", (start) => {
+      this.setState({ auctionStart: !this.state.auctionStart });
     });
     return (
       <View>
