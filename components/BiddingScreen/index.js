@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { Badge } from "native-base";
-import io from "socket.io-client";
 
 //Styles
 import styles from "./styles";
@@ -25,15 +24,12 @@ class BiddingScreen extends Component {
     bid: 0,
     currentBid: socketStore.currentBid,
     shake: true,
-    auctionStart: socketStore,
+    auctionStart: true,
   };
 
   componentDidMount() {
     socketStore.socket;
   }
-
-  submitStart = () => socketStore.submitStart("true");
-  submitStop = () => socketStore.submitStart("false");
 
   submitCurrentBid = (bid) => {
     socketStore.submitBid(bid);
@@ -50,29 +46,27 @@ class BiddingScreen extends Component {
     socketStore.socket.on("Bid", (bid) => {
       this.setState({ currentBid: bid });
     });
-
-    socketStore.socket.on("start", (start) => {
-      this.setState({ auctionStart: !this.state.auctionStart });
-    });
     return (
       <View>
         {this.state.auctionStart ? (
-          <View style={styles.nodeCameraView}>
-            <View style={styles.videoTextView}>
-              {authStore.is_vender ? <NodeCamera /> : <VideoView />}
-              <TouchableOpacity onPress={this.submitStop}>
+          <View style={styles.videoTextView}>
+            {authStore.is_vender ? <NodeCamera /> : <VideoView />}
+            {authStore.is_vender && (
+              <TouchableOpacity>
                 <Text>Stop</Text>
               </TouchableOpacity>
-            </View>
+            )}
           </View>
         ) : (
           <View style={styles.videoTextView}>
             <Text style={styles.liveStreamText}>
               Live Stream is Unavailable
             </Text>
-            <TouchableOpacity onPress={this.submitStart}>
-              <Text>START</Text>
-            </TouchableOpacity>
+            {authStore.is_vender && (
+              <TouchableOpacity>
+                <Text>START</Text>
+              </TouchableOpacity>
+            )}
           </View>
         )}
         <View>
