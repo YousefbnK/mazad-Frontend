@@ -23,7 +23,7 @@ class BiddingScreen extends Component {
   state = {
     bid: 0,
     currentBid: 0,
-    userbid: 10,
+    userbid: 100,
     shake: true,
     auctionStart: false,
   };
@@ -52,7 +52,7 @@ class BiddingScreen extends Component {
     this.socket.on("Bid", (bid) => {
       this.setState({ currentBid: bid });
     });
-
+    console.log("props", this.props);
     return (
       <View>
         {this.state.auctionStart ? (
