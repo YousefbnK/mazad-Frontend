@@ -27,8 +27,11 @@ class AddAuctionModal extends Component {
       status: true,
       amount: this.state.amount,
     };
+    console.log("Whaaa", this.state.auctionStart);
+    console.log(auctionStore.verifiedUser);
     auctionStore.submiAuctionCharg(chargObj);
     this.props.closeModal();
+    console.log(auctionStore.verifiedUser);
   };
 
   render() {

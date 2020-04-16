@@ -12,6 +12,7 @@ class AuctionStore {
   auctionItem = auctionItemData;
   loadingCat = true;
   loadingAuc = true;
+  verifiedUser = false;
 
   fetchCategories = async () => {
     try {
@@ -67,11 +68,15 @@ class AuctionStore {
     }
   };
   submiAuctionCharg = async (Charg) => {
-    try {
-      await instance.post("", Charg);
-    } catch (err) {
-      console.log(err);
-    }
+    this.verifiedUser = true;
+    console.log(Charg, this.verifiedUser);
+
+    // try {
+    //   await instance.post("", Charg);
+    //   this.verifiedUser = true;
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   submitBids = async (bid) => {

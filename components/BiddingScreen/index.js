@@ -27,7 +27,6 @@ class BiddingScreen extends Component {
     currentBid: socketStore.currentBid,
     shake: true,
     auctionStart: false,
-    verifiedUser: false,
   };
 
   componentDidMount() {
@@ -69,6 +68,7 @@ class BiddingScreen extends Component {
     });
 
     console.log("Whaaa", this.state.auctionStart);
+
     return (
       <View>
         {this.state.auctionStart ? (
@@ -111,7 +111,7 @@ class BiddingScreen extends Component {
             </Shake>
 
             {this.state.auctionStart ? (
-              this.state.verifiedUser ? (
+              authStore.verifiedUser ? (
                 <BidButton
                   onPress
                   bid={this.state.bid}
