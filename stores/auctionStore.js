@@ -14,7 +14,6 @@ class AuctionStore {
   loadingAuc = true;
   verifyUser = false;
 
-
   fetchCategories = async () => {
     try {
       const res = await instance.get("category/");
@@ -70,6 +69,7 @@ class AuctionStore {
   };
   submiAuctionCharg = async (Charg) => {
     this.verifyUser = Charg.verifyUser;
+
     try {
       await instance.post("", Charg);
     } catch (err) {

@@ -28,11 +28,12 @@ class ParticipateModal extends Component {
       amount: this.state.amount,
       verifyUser: true,
     };
-    console.log("Whaaa", this.state.auctionStart);
-    console.log(auctionStore.verifiedUser);
-    auctionStore.submiAuctionCharg(chargObj);
+
     this.props.closeModal();
-    console.log(auctionStore.verifiedUser);
+    setTimeout(function () {
+      auctionStore.submiAuctionCharg(chargObj);
+    }, 5);
+    // auctionStore.submiAuctionCharg(chargObj);
   };
 
   render() {
