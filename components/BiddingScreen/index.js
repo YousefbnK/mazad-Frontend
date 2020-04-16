@@ -26,6 +26,7 @@ class BiddingScreen extends Component {
     bid: 0,
     currentBid: socketStore.currentBid,
     shake: true,
+    verifiedUser: auctionStore.verifyUser,
     auctionStart: false,
   };
 

@@ -13,7 +13,7 @@ import Modal, {
 import { View, Text } from "react-native";
 import styles from "./styles";
 
-class AddAuctionModal extends Component {
+class ParticipateModal extends Component {
   state = {
     auction: "",
     bidder: "",
@@ -26,6 +26,7 @@ class AddAuctionModal extends Component {
       bidder: 1,
       status: true,
       amount: this.state.amount,
+      verifyUser: true,
     };
     console.log("Whaaa", this.state.auctionStart);
     console.log(auctionStore.verifiedUser);
@@ -66,4 +67,4 @@ class AddAuctionModal extends Component {
   }
 }
 
-export default AddAuctionModal;
+export default ParticipateModal;

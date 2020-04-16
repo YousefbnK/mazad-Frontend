@@ -12,7 +12,8 @@ class AuctionStore {
   auctionItem = auctionItemData;
   loadingCat = true;
   loadingAuc = true;
-  verifiedUser = false;
+  verifyUser = false;
+
 
   fetchCategories = async () => {
     try {
@@ -68,8 +69,12 @@ class AuctionStore {
     }
   };
   submiAuctionCharg = async (Charg) => {
-    this.verifiedUser = true;
-    console.log(Charg, this.verifiedUser);
+    this.verifyUser = Charg.verifyUser;
+    try {
+      await instance.post("", Charg);
+    } catch (err) {
+      console.log(err);
+    }
 
     // try {
     //   await instance.post("", Charg);
@@ -104,6 +109,7 @@ decorate(AuctionStore, {
   loadingAuc: observable,
   catObj: observable,
   filterAuctionsList: computed,
+  verifyUser: observable,
 });
 
 const auctionStore = new AuctionStore();
