@@ -19,9 +19,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     borderColor: "grey",
     borderWidth: 1,
-    width: 250,
-    height: 45,
-    marginBottom: 20,
+    width: 350,
+    height: 50,
     flexDirection: "row",
     alignItems: "center",
   },
@@ -87,6 +86,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "#eaeaea",
     borderRadius: 20,
+  },
+  paymentText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "left",
+    marginBottom: 20,
   },
 });
 

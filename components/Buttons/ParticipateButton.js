@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 
+//Style
+import { TouchableOpacity, Text, View } from "react-native";
+import styles from "./styles";
+
 //Stores
 import authStore from "../../stores/authStore";
 
 //Style
-import { Icon, Button, View } from "native-base";
 import ParticipateModal from "../Modal/ParticipateModal";
 
 class ParticipateButton extends Component {
@@ -22,27 +25,23 @@ class ParticipateButton extends Component {
   };
 
   render() {
-    if (authStore.is_vender) {
-      return (
-        <View>
-          <ParticipateModal
-            state={this.state.modalVisible}
-            closeModal={this.closeModal}
-          />
+    return (
+      <View>
+        <ParticipateModal
+          state={this.state.modalVisible}
+          closeModal={this.closeModal}
+        />
 
-          <Button
-            transparent
-            style={styles.containerAnon}
-            onPress={this.openModal}
+        <TouchableOpacity onPress={this.openModal}>
+          <View
+            style={authStore.user ? styles.container : styles.containerAnon}
           >
-            <Tex> Start Bidding !</Tex>
-          </Button>
-        </View>
-      );
-    } else {
-      return null;
-    }
+            <Text style={styles.text}>Participate</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
   }
 }
 
-export default observer(ParticipateButton);
+export default ParticipateButton;
