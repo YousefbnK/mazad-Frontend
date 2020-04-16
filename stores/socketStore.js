@@ -9,12 +9,6 @@ class SocketStore {
     this.socket.emit("Bid", bid);
     this.currentBid = bid;
   };
-
-  fetchCurrentBid = () => {
-    this.socket.on("Bid", (bid) => {
-      this.currentBid = bid;
-    });
-  };
 }
 
 decorate(SocketStore, {

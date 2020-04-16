@@ -43,7 +43,9 @@ class AuctionStore {
 
   createAuctions = async (auction) => {
     try {
-      await instance.post("auction/create", auction);
+      const res = await instance.post("auction/create", auction);
+      const auctions = res.data;
+      this.auctions.push(auctions);
     } catch (err) {
       console.error(err);
     }

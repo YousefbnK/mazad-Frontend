@@ -3,9 +3,11 @@ import { TouchableOpacity, Text, View } from "react-native";
 
 //Style
 import styles from "./styles";
+import socketStore from "../../stores/socketStore";
+import { observer } from "mobx-react";
 
 const AuctionStartButton = (props) => {
-  if (props.state) {
+  if (socketStore.auctionStart) {
     return (
       <TouchableOpacity onPress={props.stopAuction}>
         <View style={styles.containerStop}>
@@ -24,4 +26,4 @@ const AuctionStartButton = (props) => {
   }
 };
 
-export default AuctionStartButton;
+export default observer(AuctionStartButton);

@@ -8,13 +8,13 @@ import ItemAddButton from "../Buttons/ItemAddButton";
 
 class AuctionItem extends Component {
   state = {
-    auctionStart: true,
+    auctionStart: false,
     auctionID: this.props.item.id,
     venderID: this.props.item.user,
   };
 
   startAuction = () => {
-    if (!this.state.auctionStart) {
+    if (this.state.auctionStart) {
       this.props.navigation.navigate("BiddingScreen");
     }
   };
@@ -33,8 +33,8 @@ class AuctionItem extends Component {
         <View
           style={
             this.state.auctionStart
-              ? styles.auctionContainer
-              : styles.auctionContainerStart
+              ? styles.auctionContainerStart
+              : styles.auctionContainer
           }
         >
           <Text style={styles.auctionName}>{this.props.item.title}</Text>
@@ -43,7 +43,7 @@ class AuctionItem extends Component {
             <CountDown
               style={styles.countDownTimer}
               until={this.startTime()}
-              onFinish={() => this.setState({ auctionStart: false })}
+              onFinish={() => this.setState({ auctionStart: true })}
               size={15}
               digitStyle={{ backgroundColor: "#FFF" }}
               digitTxtStyle={{ color: "#1CC625" }}

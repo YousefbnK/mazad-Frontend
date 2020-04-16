@@ -27,7 +27,8 @@ class BiddingScreen extends Component {
     currentBid: socketStore.currentBid,
     shake: true,
     verifiedUser: auctionStore.verifyUser,
-    auctionStart: true,
+    auctionStart: false,
+    endAuction: false,
   };
 
   componentDidMount() {
@@ -53,8 +54,11 @@ class BiddingScreen extends Component {
   stopAuction = () => {
     this.setState({ auctionStart: false });
     socketStore.socket.emit("Stop Auction", !this.state.auctionStart);
-    alert("The auction is over thank you for participating");
+  };
+
+  endAuction = () => {
     !authStore.is_vender && this.props.navigation.navigate("AuctionListLive");
+    alert("The auction is over thank you for participating");
   };
 
   render() {
@@ -66,10 +70,17 @@ class BiddingScreen extends Component {
     });
     socketStore.socket.on("Stop Auction", (stop) => {
       this.setState({ auctionStart: stop });
+      this.setState({ endAuction: !stop });
     });
 
-    console.log("auctionStart", this.state.auctionStart);
-    console.log("verifyUser", auctionStore.verifyUser);
+    // console.log("auctionStart", this.state.auctionStart);
+    // console.log("verifyUser", auctionStore.verifyUser);
+
+    {
+      if (this.state.endAuction) {
+        this.endAuction();
+      }
+    }
 
     return (
       <View>
