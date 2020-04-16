@@ -8,17 +8,17 @@ import { Shake } from "react-native-motion";
 
 //Stores
 import auctionStore from "../../stores/auctionStore";
+import socketStore from "../../stores/socketStore";
+import authStore from "../../stores/authStore";
 
 //Buttons
 import BidButton from "../Buttons/BidButton";
 import ParticipateButton from "../Buttons/ParticipateButton";
 
 //Components
+import Badges from "./Bages";
 import NodeCamera from "../Stream/NodeCamera";
 import VideoView from "../Stream/VideoView";
-import authStore from "../../stores/authStore";
-import socketStore from "../../stores/socketStore";
-import Badges from "./Bages";
 import AuctionStartButton from "../Buttons/AuctionStartButton";
 
 class BiddingScreen extends Component {
@@ -27,7 +27,7 @@ class BiddingScreen extends Component {
     currentBid: socketStore.currentBid,
     shake: true,
     verifiedUser: auctionStore.verifyUser,
-    auctionStart: false,
+    auctionStart: true,
   };
 
   componentDidMount() {
@@ -68,7 +68,8 @@ class BiddingScreen extends Component {
       this.setState({ auctionStart: stop });
     });
 
-    console.log("Whaaa", this.state.auctionStart);
+    console.log("auctionStart", this.state.auctionStart);
+    console.log("verifyUser", auctionStore.verifyUser);
 
     return (
       <View>
@@ -112,7 +113,7 @@ class BiddingScreen extends Component {
             </Shake>
 
             {this.state.auctionStart ? (
-              authStore.verifiedUser ? (
+              auctionStore.verifyUser ? (
                 <BidButton
                   onPress
                   bid={this.state.bid}
