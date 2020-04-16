@@ -33,9 +33,7 @@ class ParticipateButton extends Component {
         />
 
         <TouchableOpacity onPress={this.openModal}>
-          <View
-            style={authStore.user ? styles.container : styles.containerAnon}
-          >
+          <View style={styles.container}>
             <Text style={styles.text}>Participate</Text>
           </View>
         </TouchableOpacity>
