@@ -3,12 +3,12 @@ import { Badge } from "native-base";
 
 //Styles
 import styles from "./styles";
-import { Text, View, TouchableHighlight } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 
 const Bages = (props) => {
   return (
     <View style={styles.badge}>
-      <TouchableHighlight onPress={() => props.handleadd(5)}>
+      <TouchableOpacity onPress={() => props.handleadd(5)}>
         <View style={{ padding: 4 }}>
           <Badge
             style={{
@@ -19,8 +19,8 @@ const Bages = (props) => {
             <Text style={{ color: "white" }}>+5 kd</Text>
           </Badge>
         </View>
-      </TouchableHighlight>
-      <TouchableHighlight onPress={() => props.handleadd(10)}>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => props.handleadd(10)}>
         <View style={{ padding: 4 }}>
           <Badge
             style={{
@@ -31,8 +31,8 @@ const Bages = (props) => {
             <Text style={{ color: "white" }}>+10 kd</Text>
           </Badge>
         </View>
-      </TouchableHighlight>
-      <TouchableHighlight onPress={() => props.handleadd(50)}>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => props.handleadd(50)}>
         <View style={{ padding: 4 }}>
           <Badge
             style={{
@@ -44,7 +44,7 @@ const Bages = (props) => {
             <Text style={{ color: "white" }}>+50 kd</Text>
           </Badge>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   );
 };

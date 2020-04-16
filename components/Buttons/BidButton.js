@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableHighlight, Text, View } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 
 //Style
 import styles from "./styles";
@@ -23,11 +23,11 @@ const BidButton = (props) => {
     }
   };
   return (
-    <TouchableHighlight underlayColor="#49b64d" onPress={submitBid}>
+    <TouchableOpacity onPress={submitBid}>
       <View style={authStore.user ? styles.container : styles.containerAnon}>
         <Text style={styles.text}>Bid</Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

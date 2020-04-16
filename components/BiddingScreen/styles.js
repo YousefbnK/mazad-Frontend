@@ -81,8 +81,10 @@ const styles = StyleSheet.create({
   biddingsection: {
     flexDirection: "row",
     borderColor: "red",
+    justifyContent: "space-between",
+    paddingLeft: 20,
+    paddingRight: 20,
   },
-
   badge: {
     borderColor: "black",
     flexDirection: "row",
@@ -91,6 +93,28 @@ const styles = StyleSheet.create({
     fontFamily: "Arial",
     justifyContent: "flex-start",
     paddingTop: 2,
+    paddingLeft: 20,
+  },
+  pleaseWait: {
+    marginTop: "5%",
+    fontSize: 14,
+    fontFamily: "Arial",
+    marginLeft: "3%",
+  },
+  chatMessage: {
+    height: 35,
+    width: width,
+    borderRadius: 10,
+    borderColor: "black",
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    // alignSelf: "flex-start",
+    // position: "absolute",
+    bottom: 0,
+    margin: 3,
+    fontSize: 15,
+    fontFamily: "Arial",
   },
 });
 

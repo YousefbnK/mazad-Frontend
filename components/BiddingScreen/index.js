@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import { Badge } from "native-base";
-import Badges from "./Bages";
 
 //Styles
 import styles from "./styles";
@@ -13,19 +11,23 @@ import auctionStore from "../../stores/auctionStore";
 
 //Buttons
 import BidButton from "../Buttons/BidButton";
+import ParticipateButton from "../Buttons/ParticipateButton";
 
 //Components
 import NodeCamera from "../Stream/NodeCamera";
 import VideoView from "../Stream/VideoView";
 import authStore from "../../stores/authStore";
 import socketStore from "../../stores/socketStore";
+import Badges from "./Bages";
+import AuctionStartButton from "../Buttons/AuctionStartButton";
 
 class BiddingScreen extends Component {
   state = {
     bid: 0,
     currentBid: socketStore.currentBid,
     shake: true,
-    auctionStart: true,
+    auctionStart: false,
+    verifiedUser: false,
   };
 
   componentDidMount() {
@@ -43,10 +45,30 @@ class BiddingScreen extends Component {
     this.setState({ bid: newValue });
   };
 
+  startAuction = () => {
+    this.setState({ auctionStart: true });
+    socketStore.socket.emit("Start Auction", !this.state.auctionStart);
+  };
+
+  stopAuction = () => {
+    this.setState({ auctionStart: false });
+    socketStore.socket.emit("Stop Auction", !this.state.auctionStart);
+    alert("The auction is over thank you for participating");
+    !authStore.is_vender && this.props.navigation.navigate("AuctionListLive");
+  };
+
   render() {
     socketStore.socket.on("Bid", (bid) => {
       this.setState({ currentBid: bid });
     });
+    socketStore.socket.on("Start Auction", (start) => {
+      this.setState({ auctionStart: start });
+    });
+    socketStore.socket.on("Stop Auction", (stop) => {
+      this.setState({ auctionStart: stop });
+    });
+
+    console.log("Whaaa", this.state.auctionStart);
     return (
       <View>
         {this.state.auctionStart ? (
@@ -60,31 +82,6 @@ class BiddingScreen extends Component {
             </Text>
           </View>
         )}
-        <View>
-        <View style={styles.camra}>
-          {this.state.auctionStart ? (
-            <View>
-              {/* style={styles.nodeCameraView} war rem top */}
-              <View style={styles.videoTextView}>
-                {authStore.is_vender ? <NodeCamera /> : <VideoView />}
-                <TouchableOpacity onPress={this.submitStop}>
-                  <Text>Stop</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          ) : (
-            <View>
-              {/* <View style={styles.videoTextView}>  was rm top*/}
-
-              <Text style={styles.liveStreamText}>
-                Live Stream is Unavailable
-              </Text>
-              <TouchableOpacity onPress={this.submitStart}>
-                <Text>START</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
         <View style={styles.textsection}>
           {this.state.currentBid < 1 ? (
             <Text style={styles.bidText}>
@@ -96,32 +93,50 @@ class BiddingScreen extends Component {
             </Text>
           )}
         </View>
-        <View style={styles.biddingsection}>
-          {/* <View style={styles.buttonView}>  was removed top*/}
 
-          <Shake value={this.state.shake} type="timing">
-            <TextInput
-              style={styles.textInput}
-              keyboardType="numeric"
-              textAlign="center"
-              defaultValue={`${this.state.bid}`}
-              onChangeText={(bid) => {
-                this.setState({ bid });
-              }}
-            />
-          </Shake>
+        {!authStore.is_vender ? (
+          <View style={styles.biddingsection}>
+            {/* <View style={styles.buttonView}>  was removed top*/}
 
-          <BidButton
-            onPress
-            bid={this.state.bid}
-            submitBid={this.submitCurrentBid}
-            currentBid={this.state.currentBid}
-            shake={this.setTimeout}
-            navigation={this.props.navigation}
+            <Shake value={this.state.shake} type="timing">
+              <TextInput
+                style={styles.textInput}
+                keyboardType="numeric"
+                textAlign="center"
+                defaultValue={`${this.state.bid}`}
+                onChangeText={(bid) => {
+                  this.setState({ bid });
+                }}
+              />
+            </Shake>
+
+            {this.state.auctionStart ? (
+              this.state.verifiedUser ? (
+                <BidButton
+                  onPress
+                  bid={this.state.bid}
+                  submitBid={this.submitCurrentBid}
+                  currentBid={this.state.currentBid}
+                  shake={this.setTimeout}
+                  navigation={this.props.navigation}
+                />
+              ) : (
+                <ParticipateButton />
+              )
+            ) : (
+              <Text style={styles.pleaseWait}>
+                Please wait for auction to start
+              </Text>
+            )}
+          </View>
+        ) : (
+          <AuctionStartButton
+            state={this.state.auctionStart}
+            startAuction={this.startAuction}
+            stopAuction={this.stopAuction}
           />
-        </View>
-
-        <Badges handleadd={this.handleadd} />
+        )}
+        {!authStore.is_vender && <Badges handleadd={this.handleadd} />}
       </View>
     );
   }

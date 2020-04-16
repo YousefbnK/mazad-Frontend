@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { LiteCreditCardInput } from "react-native-credit-card-input";
 
 //Stores
 import auctionStore from "../../stores/auctionStore";
@@ -10,14 +10,14 @@ import Modal, {
   ModalFooter,
   ModalButton,
 } from "react-native-modals";
-import { View, TextInput, Button, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import styles from "./styles";
 
 class AddAuctionModal extends Component {
   state = {
     auction: "",
     bidder: "",
-    amount: "",
+    amount: 1,
   };
 
   submiAuctionCharg = () => {
@@ -25,7 +25,7 @@ class AddAuctionModal extends Component {
       auction: 1,
       bidder: 1,
       status: true,
-      amount: 10,
+      amount: this.state.amount,
     };
     auctionStore.submiAuctionCharg(chargObj);
     this.props.closeModal();
@@ -47,21 +47,14 @@ class AddAuctionModal extends Component {
           }
         >
           <ModalContent>
+            <Text style={styles.paymentText}>
+              Please pay the deposit to start bidding
+            </Text>
+            <Text style={styles.paymentText}>
+              Amount: {this.state.amount} KD
+            </Text>
             <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.inputs}
-                placeholder="Name on Card"
-                onChangeText={(val) => this.setState({ val })}
-              />
-            </View>
-
-            <View style={styles.desContainer}>
-              <TextInput
-                style={styles.desInputs}
-                placeholder="Card number"
-                underlineColorAndroid="transparent"
-                onChangeText={(val) => this.setState({ val })}
-              />
+              <LiteCreditCardInput />
             </View>
           </ModalContent>
         </Modal>
