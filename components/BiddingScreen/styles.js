@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
 
   textsection: {
     height: "10%",
-    alignSelf: "flex-start",
     borderColor: "black",
   },
 
@@ -101,18 +100,12 @@ const styles = StyleSheet.create({
     fontFamily: "Arial",
     marginLeft: "3%",
   },
-  chatMessage: {
-    height: 35,
-    width: width,
-    borderRadius: 10,
-    borderColor: "black",
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    // alignSelf: "flex-start",
-    // position: "absolute",
-    bottom: 0,
-    margin: 3,
+  bidMessage: {
+    alignSelf: "flex-start",
+    position: "absolute",
+    bottom: 10,
+    marginTop: 20,
+    right: 40,
     fontSize: 15,
     fontFamily: "Arial",
   },

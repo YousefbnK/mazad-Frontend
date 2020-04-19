@@ -7,7 +7,7 @@ import socketStore from "../../stores/socketStore";
 import { observer } from "mobx-react";
 
 const AuctionStartButton = (props) => {
-  if (socketStore.auctionStart) {
+  if (props.state) {
     return (
       <TouchableOpacity onPress={props.stopAuction}>
         <View style={styles.containerStop}>

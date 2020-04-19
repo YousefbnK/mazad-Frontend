@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 
 //Styles
 import styles from "./styles";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, Animated } from "react-native";
 import { Shake } from "react-native-motion";
 
 //Stores
@@ -27,8 +27,12 @@ class BiddingScreen extends Component {
     currentBid: socketStore.currentBid,
     shake: true,
     verifiedUser: auctionStore.verifyUser,
-    auctionStart: false,
+    auctionStart: true,
     endAuction: false,
+    user: authStore.userData.userName,
+    startValue: new Animated.Value(0),
+    endValue: 1,
+    duration: 1000,
   };
 
   componentDidMount() {
@@ -37,6 +41,11 @@ class BiddingScreen extends Component {
 
   submitCurrentBid = (bid) => {
     socketStore.submitBid(bid);
+    Animated.timing(this.state.startValue, {
+      toValue: this.state.endValue,
+      duration: this.state.duration,
+      useNativeDriver: true,
+    }).start();
   };
 
   setTimeout = () => this.setState({ shake: !this.state.shake });
@@ -126,7 +135,6 @@ class BiddingScreen extends Component {
             {this.state.auctionStart ? (
               auctionStore.verifyUser ? (
                 <BidButton
-                  onPress
                   bid={this.state.bid}
                   submitBid={this.submitCurrentBid}
                   currentBid={this.state.currentBid}
@@ -150,6 +158,13 @@ class BiddingScreen extends Component {
           />
         )}
         {!authStore.is_vender && <Badges handleadd={this.handleadd} />}
+
+        <Animated.View style={{ opacity: this.state.startValue }}>
+          <Text style={styles.bidMessage}>
+            <Text style={{ fontWeight: "bold" }}>{this.state.user}</Text> made a
+            bid
+          </Text>
+        </Animated.View>
       </View>
     );
   }

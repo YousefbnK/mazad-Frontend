@@ -7,9 +7,13 @@ const VideoView = () => {
   return (
     <Video
       style={styles.backgroundVideo}
+      // source={{
+      //   uri:
+      //     "https://stream.mux.com/sol9OK802ufu4TWNIdZkVjRJQ02wmaunPAq5UPhMVGab4",
+      // }}
       source={{
         uri:
-          "https://stream.mux.com/sol9OK802ufu4TWNIdZkVjRJQ02wmaunPAq5UPhMVGab4",
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       }}
     />
   );

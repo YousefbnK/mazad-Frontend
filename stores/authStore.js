@@ -41,6 +41,7 @@ class AuthStore {
         email: user.email,
         firstName: user.first_name,
         lastName: user.last_name,
+        userName: user.username,
       };
 
       console.log(" this.userData", this.userData);
