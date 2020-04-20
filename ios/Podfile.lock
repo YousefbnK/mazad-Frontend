@@ -264,7 +264,7 @@ PODS:
     - React
   - RNGestureHandler (1.5.6):
     - React
-  - RNReanimated (1.4.0):
+  - RNReanimated (1.8.0):
     - React
   - RNScreens (2.0.0-alpha.12):
     - React
@@ -528,7 +528,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNDateTimePicker: 9db00606d689f5653f08aa601c81b9d3266a0a19
   RNGestureHandler: 911d3b110a7a233a34c4f800e7188a84b75319c6
-  RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
+  RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: 254da4b84f25971cbb30ed3ddc84131f23cac812
   UMBarCodeScannerInterface: 3802c8574ef119c150701d679ab386e2266d6a54
   UMCameraInterface: 985d301f688ed392f815728f0dd906ca34b7ccb1

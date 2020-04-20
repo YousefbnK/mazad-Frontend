@@ -27,7 +27,7 @@ class BiddingScreen extends Component {
     currentBid: socketStore.currentBid,
     shake: true,
     verifiedUser: auctionStore.verifyUser,
-    auctionStart: true,
+    auctionStart: false,
     endAuction: false,
     user: authStore.userData.userName,
     startValue: new Animated.Value(0),
@@ -66,8 +66,8 @@ class BiddingScreen extends Component {
   };
 
   endAuction = () => {
-    !authStore.is_vender && this.props.navigation.navigate("AuctionListLive");
-    alert("The auction is over thank you for participating");
+    !authStore.is_vender &&
+      this.props.navigation.navigate("AuctionListLive", { endAuction: true });
   };
 
   render() {
@@ -81,9 +81,6 @@ class BiddingScreen extends Component {
       this.setState({ auctionStart: stop });
       this.setState({ endAuction: !stop });
     });
-
-    // console.log("auctionStart", this.state.auctionStart);
-    // console.log("verifyUser", auctionStore.verifyUser);
 
     {
       if (this.state.endAuction) {
@@ -158,13 +155,6 @@ class BiddingScreen extends Component {
           />
         )}
         {!authStore.is_vender && <Badges handleadd={this.handleadd} />}
-
-        <Animated.View style={{ opacity: this.state.startValue }}>
-          <Text style={styles.bidMessage}>
-            <Text style={{ fontWeight: "bold" }}>{this.state.user}</Text> made a
-            bid
-          </Text>
-        </Animated.View>
       </View>
     );
   }

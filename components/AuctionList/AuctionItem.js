@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import CountDown from "react-native-countdown-component";
 
 //Styles
-import { Text, View, TouchableOpacity, Button, Icon } from "react-native";
+import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import styles from "./styles";
 import ItemAddButton from "../Buttons/ItemAddButton";
+
+//Stores
+import auctionStore from "../../stores/auctionStore";
 
 class AuctionItem extends Component {
   state = {
@@ -28,6 +31,10 @@ class AuctionItem extends Component {
   };
 
   render() {
+    catObj = auctionStore.categories.find(
+      (catitem) => this.props.item.category === catitem.id
+    );
+    catimge = catObj.image;
     return (
       <TouchableOpacity onPress={this.startAuction}>
         <View

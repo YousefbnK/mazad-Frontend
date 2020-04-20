@@ -13,6 +13,10 @@ import AuctionItem from "./AuctionItem";
 import AddAuctionButton from "../Buttons/AddAuctionButton";
 
 class LiveAuctionList extends Component {
+  state = {
+    endAuction: this.props.navigation.getParam("endAuction"),
+  };
+
   render() {
     if (auctionStore.loadingAuc) {
       return <Spinner />;
@@ -21,6 +25,10 @@ class LiveAuctionList extends Component {
       const liveAuaction = auctionStore.auctions.filter(
         (auction) => new Date(auction.start_date) - new Date() < ONE_HOUR
       );
+
+      if (this.state.endAuction) {
+        alert("The auction has ended, thank you for participating");
+      }
 
       const auctions = liveAuaction.map((auction) => (
         <AuctionItem
